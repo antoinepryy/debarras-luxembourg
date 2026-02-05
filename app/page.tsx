@@ -5,6 +5,7 @@ import {
   AboutFamily,
   Zones,
   ContactCTA,
+  Testimonials,
 } from "@/components/sections";
 
 export default function HomePage() {
@@ -14,6 +15,7 @@ export default function HomePage() {
       <Services />
       <Categories limit={8} />
       <AboutFamily />
+      <Testimonials />
       <Zones />
       <ContactCTA />
     </>
