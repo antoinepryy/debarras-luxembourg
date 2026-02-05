@@ -2,13 +2,11 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import Image from "next/image";
 import { Container, Button } from "@/components/ui";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
-import { fadeUp, slideInLeft, slideInRight } from "@/lib/animations";
+import { slideInLeft, slideInRight } from "@/lib/animations";
 
 interface AboutFamilyProps {
-  image?: string;
   title?: string;
   text?: string;
 }
@@ -20,7 +18,6 @@ const stats = [
 ];
 
 export function AboutFamily({
-  image = "/images/family/weinrich-family.jpg",
   title = "Une tradition familiale depuis plus de 30 ans",
   text = "La famille Weinrich vous propose son expertise dans le domaine des antiquités et du débarras. Passionnés par les objets anciens et l'histoire qu'ils portent, nous mettons notre savoir-faire à votre service pour l'estimation, le rachat et le débarras de vos biens. Notre engagement : vous offrir un service professionnel, transparent et respectueux de votre patrimoine.",
 }: AboutFamilyProps) {
@@ -30,7 +27,6 @@ export function AboutFamily({
     offset: ["start end", "end start"],
   });
 
-  const imageY = useTransform(scrollYProgress, [0, 1], [50, -50]);
   const decorY = useTransform(scrollYProgress, [0, 1], [100, -100]);
 
   return (
@@ -49,7 +45,7 @@ export function AboutFamily({
 
       <Container className="relative">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* Image Section */}
+          {/* Visual Section */}
           <motion.div
             variants={slideInLeft}
             initial="hidden"
@@ -58,18 +54,78 @@ export function AboutFamily({
             className="relative"
           >
             <motion.div
-              className="relative h-[450px] md:h-[550px] rounded-2xl overflow-hidden"
-              style={{ y: imageY }}
+              className="relative h-[450px] md:h-[550px] rounded-2xl overflow-hidden bg-gradient-to-br from-[var(--color-secondary)] via-[#4a0404] to-[var(--color-secondary-dark)]"
             >
-              <Image
-                src={image}
-                alt="Famille Weinrich"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
+              {/* Decorative pattern */}
+              <div
+                className="absolute inset-0 opacity-10"
+                style={{
+                  backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+                }}
               />
-              {/* Overlay gradient */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+
+              {/* Animated glow */}
+              <motion.div
+                className="absolute inset-0"
+                style={{
+                  background: "radial-gradient(ellipse at 30% 30%, rgba(212,175,55,0.3) 0%, transparent 50%)",
+                }}
+                animate={{
+                  opacity: [0.3, 0.6, 0.3],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+
+              {/* Icon display */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <motion.div
+                  className="w-32 h-32 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center"
+                  animate={{
+                    scale: [1, 1.05, 1],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-16 h-16 text-[var(--color-primary)]">
+                    <path d="M11.584 2.376a.75.75 0 01.832 0l9 6a.75.75 0 11-.832 1.248L12 3.901 3.416 9.624a.75.75 0 01-.832-1.248l9-6z" />
+                    <path fillRule="evenodd" d="M20.25 10.332v9.918H21a.75.75 0 010 1.5H3a.75.75 0 010-1.5h.75v-9.918a.75.75 0 01.634-.74A49.109 49.109 0 0112 9c2.59 0 5.134.202 7.616.592a.75.75 0 01.634.74zm-7.5 2.418a.75.75 0 00-1.5 0v6.75a.75.75 0 001.5 0v-6.75zm3-.75a.75.75 0 01.75.75v6.75a.75.75 0 01-1.5 0v-6.75a.75.75 0 01.75-.75zM9 12.75a.75.75 0 00-1.5 0v6.75a.75.75 0 001.5 0v-6.75z" clipRule="evenodd" />
+                  </svg>
+                </motion.div>
+              </div>
+
+              {/* Floating elements */}
+              <motion.div
+                className="absolute top-10 right-10 w-20 h-20 border border-[var(--color-primary)]/30 rounded-full"
+                animate={{
+                  y: [0, -10, 0],
+                  rotate: [0, 5, 0],
+                }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+              <motion.div
+                className="absolute bottom-20 left-10 w-12 h-12 bg-[var(--color-primary)]/20 rounded-lg"
+                animate={{
+                  y: [0, 10, 0],
+                  rotate: [0, -5, 0],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 1,
+                }}
+              />
             </motion.div>
 
             {/* Decorative elements */}

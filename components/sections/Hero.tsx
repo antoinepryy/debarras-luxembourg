@@ -9,7 +9,6 @@ import { fadeUp, staggerContainer, staggerItem } from "@/lib/animations";
 interface HeroProps {
   title?: string;
   subtitle?: string;
-  backgroundImage?: string;
 }
 
 function AnimatedText({ text, className }: { text: string; className?: string }) {
@@ -66,7 +65,6 @@ function FloatingElement({
 export function Hero({
   title = "Débarras Luxembourg",
   subtitle = "Service professionnel de débarras, expertise et rachat d'antiquités dans tout le Luxembourg. Déplacement gratuit, paiement comptant.",
-  backgroundImage = "/images/hero/hero-bg.jpg",
 }: HeroProps) {
   const containerRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
@@ -76,7 +74,6 @@ export function Hero({
 
   const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 1.1]);
 
   const features = [
     { text: "Déplacement gratuit", icon: "truck" },
@@ -89,21 +86,40 @@ export function Hero({
       ref={containerRef}
       className="relative min-h-[100vh] flex items-center overflow-hidden"
     >
-      {/* Animated Background */}
-      <motion.div
-        className="absolute inset-0"
-        style={{ scale }}
-      >
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+      {/* Animated Gradient Background */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-secondary)] via-[#4a0404] to-[var(--color-secondary-dark)]" />
+        {/* Animated gradient overlay */}
+        <motion.div
+          className="absolute inset-0"
           style={{
-            backgroundImage: `url('${backgroundImage}')`,
+            background: "radial-gradient(ellipse at 30% 20%, rgba(212,175,55,0.15) 0%, transparent 50%)",
+          }}
+          animate={{
+            opacity: [0.5, 0.8, 0.5],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut",
           }}
         />
-        {/* Modern gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-black/90 via-black/70 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-      </motion.div>
+        <motion.div
+          className="absolute inset-0"
+          style={{
+            background: "radial-gradient(ellipse at 70% 80%, rgba(133,6,6,0.3) 0%, transparent 50%)",
+          }}
+          animate={{
+            opacity: [0.3, 0.6, 0.3],
+          }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1,
+          }}
+        />
+      </div>
 
       {/* Decorative Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
