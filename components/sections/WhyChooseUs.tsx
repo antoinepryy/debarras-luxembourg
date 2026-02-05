@@ -124,14 +124,14 @@ export function WhyChooseUs() {
         <motion.div
           className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full"
           style={{
-            background: "radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 60%)",
+            background: "radial-gradient(circle, rgba(245,158,11,0.08) 0%, transparent 60%)",
             y,
           }}
         />
         <motion.div
           className="absolute bottom-0 right-1/4 w-[500px] h-[500px] rounded-full"
           style={{
-            background: "radial-gradient(circle, rgba(139,0,0,0.06) 0%, transparent 60%)",
+            background: "radial-gradient(circle, rgba(37,99,235,0.06) 0%, transparent 60%)",
             y: useTransform(scrollYProgress, [0, 1], [-50, 50]),
           }}
         />

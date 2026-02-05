@@ -121,7 +121,7 @@ export function FAQ() {
         <motion.div
           className="absolute -top-40 -right-40 w-80 h-80 rounded-full"
           style={{
-            background: "radial-gradient(circle, rgba(212,175,55,0.1) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(245,158,11,0.1) 0%, transparent 70%)",
           }}
           animate={{
             scale: [1, 1.2, 1],
@@ -131,7 +131,7 @@ export function FAQ() {
         <motion.div
           className="absolute -bottom-40 -left-40 w-96 h-96 rounded-full"
           style={{
-            background: "radial-gradient(circle, rgba(139,0,0,0.05) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(37,99,235,0.05) 0%, transparent 70%)",
           }}
           animate={{
             scale: [1.2, 1, 1.2],

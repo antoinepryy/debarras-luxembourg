@@ -30,7 +30,7 @@ export function ContactCTA({
     >
       {/* Animated gradient background */}
       <motion.div
-        className="absolute inset-0 bg-gradient-to-br from-[var(--color-secondary)] via-[#6a0505] to-[var(--color-secondary-dark)]"
+        className="absolute inset-0 bg-gradient-to-br from-[var(--color-secondary)] via-[#1e3a8a] to-[var(--color-secondary-dark)]"
         animate={{
           backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"],
         }}
@@ -50,7 +50,7 @@ export function ContactCTA({
         <motion.div
           className="absolute -top-32 -right-32 w-[400px] h-[400px] rounded-full"
           style={{
-            background: "radial-gradient(circle, rgba(212,175,55,0.2) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(245,158,11,0.2) 0%, transparent 70%)",
             y,
           }}
           animate={{
@@ -96,7 +96,7 @@ export function ContactCTA({
           <motion.path
             d="M0,100 Q400,50 800,100 T1600,100"
             fill="none"
-            stroke="rgba(212,175,55,0.1)"
+            stroke="rgba(245,158,11,0.1)"
             strokeWidth="2"
             initial={{ pathLength: 0 }}
             whileInView={{ pathLength: 1 }}

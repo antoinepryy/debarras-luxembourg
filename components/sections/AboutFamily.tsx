@@ -36,7 +36,7 @@ export function AboutFamily({
         <motion.div
           className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full"
           style={{
-            background: "radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(245,158,11,0.08) 0%, transparent 70%)",
             y: decorY,
           }}
         />
@@ -54,7 +54,7 @@ export function AboutFamily({
             className="relative"
           >
             <motion.div
-              className="relative h-[450px] md:h-[550px] rounded-2xl overflow-hidden bg-gradient-to-br from-[var(--color-secondary)] via-[#4a0404] to-[var(--color-secondary-dark)]"
+              className="relative h-[450px] md:h-[550px] rounded-2xl overflow-hidden bg-gradient-to-br from-[var(--color-secondary)] via-[#1e3a8a] to-[var(--color-secondary-dark)]"
             >
               {/* Decorative pattern */}
               <div
@@ -68,7 +68,7 @@ export function AboutFamily({
               <motion.div
                 className="absolute inset-0"
                 style={{
-                  background: "radial-gradient(ellipse at 30% 30%, rgba(212,175,55,0.3) 0%, transparent 50%)",
+                  background: "radial-gradient(ellipse at 30% 30%, rgba(245,158,11,0.25) 0%, transparent 50%)",
                 }}
                 animate={{
                   opacity: [0.3, 0.6, 0.3],

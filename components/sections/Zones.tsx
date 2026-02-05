@@ -51,7 +51,7 @@ function ZoneCard({ zone, index }: { zone: (typeof ZONES)[0]; index: number }) {
         <motion.div
           className="relative w-12 h-12 mx-auto mb-3 rounded-full flex items-center justify-center"
           animate={{
-            backgroundColor: isHovered ? "var(--color-primary)" : "rgba(212,175,55,0.1)",
+            backgroundColor: isHovered ? "var(--color-primary)" : "rgba(37,99,235,0.1)",
           }}
           transition={{ duration: 0.2 }}
         >

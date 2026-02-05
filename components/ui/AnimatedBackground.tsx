@@ -92,7 +92,7 @@ export function GradientOrbs() {
       <motion.div
         className="absolute w-[500px] h-[500px] rounded-full"
         style={{
-          background: "radial-gradient(circle, rgba(212,175,55,0.15) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(245,158,11,0.12) 0%, transparent 70%)",
           top: "-10%",
           right: "-10%",
         }}
@@ -109,7 +109,7 @@ export function GradientOrbs() {
       <motion.div
         className="absolute w-[400px] h-[400px] rounded-full"
         style={{
-          background: "radial-gradient(circle, rgba(133,6,6,0.1) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(37,99,235,0.1) 0%, transparent 70%)",
           bottom: "-5%",
           left: "-5%",
         }}

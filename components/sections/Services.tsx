@@ -86,7 +86,7 @@ function ServiceCard({ service, index }: ServiceCardProps) {
           <motion.div
             className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
             style={{
-              background: `radial-gradient(circle at ${mousePosition.x + 150}px ${mousePosition.y + 150}px, rgba(212,175,55,0.15) 0%, transparent 50%)`,
+              background: `radial-gradient(circle at ${mousePosition.x + 150}px ${mousePosition.y + 150}px, rgba(37,99,235,0.12) 0%, transparent 50%)`,
             }}
           />
 

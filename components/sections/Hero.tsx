@@ -63,7 +63,7 @@ export function Hero({
         <motion.div
           className="absolute inset-0"
           style={{
-            background: "linear-gradient(135deg, #850606 0%, #4a0404 40%, #2d0303 70%, #1a0202 100%)",
+            background: "linear-gradient(135deg, #1e40af 0%, #1e3a8a 40%, #172554 70%, #0f172a 100%)",
           }}
           animate={{
             backgroundPosition: ["0% 0%", "100% 100%"],
@@ -83,11 +83,11 @@ export function Hero({
           }}
         />
 
-        {/* Animated gold accent */}
+        {/* Animated amber accent */}
         <motion.div
           className="absolute inset-0"
           style={{
-            background: "radial-gradient(ellipse at 20% 30%, rgba(212,175,55,0.2) 0%, transparent 40%)",
+            background: "radial-gradient(ellipse at 20% 30%, rgba(245,158,11,0.15) 0%, transparent 40%)",
           }}
           animate={{
             opacity: [0.4, 0.7, 0.4],
@@ -144,7 +144,7 @@ export function Hero({
         <motion.div
           className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full"
           style={{
-            background: "radial-gradient(circle, rgba(212,175,55,0.15) 0%, transparent 60%)",
+            background: "radial-gradient(circle, rgba(245,158,11,0.12) 0%, transparent 60%)",
           }}
           animate={{
             scale: [1, 1.2, 1],
@@ -159,7 +159,7 @@ export function Hero({
         <motion.div
           className="absolute -bottom-40 -left-40 w-[600px] h-[600px] rounded-full"
           style={{
-            background: "radial-gradient(circle, rgba(133,6,6,0.3) 0%, transparent 60%)",
+            background: "radial-gradient(circle, rgba(37,99,235,0.2) 0%, transparent 60%)",
           }}
           animate={{
             scale: [1, 1.15, 1],
@@ -179,7 +179,7 @@ export function Hero({
             y1="100%"
             x2="40%"
             y2="60%"
-            stroke="rgba(212,175,55,0.1)"
+            stroke="rgba(245,158,11,0.1)"
             strokeWidth="1"
             initial={{ pathLength: 0 }}
             animate={{ pathLength: 1 }}
@@ -190,7 +190,7 @@ export function Hero({
             y1="0"
             x2="60%"
             y2="40%"
-            stroke="rgba(212,175,55,0.08)"
+            stroke="rgba(245,158,11,0.08)"
             strokeWidth="1"
             initial={{ pathLength: 0 }}
             animate={{ pathLength: 1 }}
