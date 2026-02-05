@@ -6,3 +6,4 @@ export { PhoneBadge } from "./PhoneBadge";
 export { ImageWithOverlay } from "./ImageWithOverlay";
 export { AnimatedBackground, ParticleField, GradientOrbs } from "./AnimatedBackground";
 export { AnimatedCounter } from "./AnimatedCounter";
+export { FloatingContact } from "./FloatingContact";
