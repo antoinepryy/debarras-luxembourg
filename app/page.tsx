@@ -1,11 +1,13 @@
 import {
   Hero,
   Services,
+  WhyChooseUs,
   Categories,
   AboutFamily,
+  Testimonials,
+  FAQ,
   Zones,
   ContactCTA,
-  Testimonials,
 } from "@/components/sections";
 
 export default function HomePage() {
@@ -13,9 +15,11 @@ export default function HomePage() {
     <>
       <Hero />
       <Services />
+      <WhyChooseUs />
       <Categories limit={8} />
       <AboutFamily />
       <Testimonials />
+      <FAQ />
       <Zones />
       <ContactCTA />
     </>

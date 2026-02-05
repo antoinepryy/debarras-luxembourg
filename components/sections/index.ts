@@ -5,3 +5,5 @@ export { AboutFamily } from "./AboutFamily";
 export { Zones } from "./Zones";
 export { ContactCTA } from "./ContactCTA";
 export { Testimonials } from "./Testimonials";
+export { FAQ } from "./FAQ";
+export { WhyChooseUs } from "./WhyChooseUs";
