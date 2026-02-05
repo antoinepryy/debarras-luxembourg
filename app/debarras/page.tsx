@@ -1,12 +1,9 @@
-import { Metadata } from "next";
+"use client";
+
+import { motion } from "framer-motion";
 import { Container, SectionTitle, Button } from "@/components/ui";
 import { ContactCTA } from "@/components/sections";
-
-export const metadata: Metadata = {
-  title: "Service de Débarras",
-  description:
-    "Service professionnel de débarras de maisons, appartements, caves et greniers au Luxembourg. Intervention rapide et devis gratuit.",
-};
+import { fadeUp, staggerContainer, staggerItem } from "@/lib/animations";
 
 const debarrasTypes = [
   {
@@ -55,24 +52,52 @@ const debarrasTypes = [
   },
 ];
 
+const processSteps = [
+  { step: "1", title: "Contact", description: "Appelez-nous ou remplissez le formulaire de contact" },
+  { step: "2", title: "Visite", description: "Nous nous déplaçons gratuitement pour évaluer" },
+  { step: "3", title: "Devis", description: "Vous recevez un devis détaillé et sans engagement" },
+  { step: "4", title: "Intervention", description: "Notre équipe réalise le débarras à la date convenue" },
+];
+
 export default function DebarrasPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative py-20 bg-[var(--color-secondary)]">
-        <Container>
-          <div className="text-center text-white">
+      <section className="relative py-24 md:py-32 bg-gradient-to-br from-[var(--color-secondary)] via-[var(--color-secondary-dark)] to-[var(--color-secondary)] overflow-hidden">
+        {/* Background decorations */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--color-primary)]/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full blur-2xl" />
+        </div>
+
+        <Container className="relative z-10">
+          <motion.div
+            className="text-center text-white max-w-3xl mx-auto"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2 }}
+              className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full mb-6"
+            >
+              <span className="w-2 h-2 bg-[var(--color-primary)] rounded-full" />
+              <span className="text-sm">Service professionnel</span>
+            </motion.div>
+
             <h1
-              className="text-4xl md:text-5xl font-bold mb-4"
+              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
               style={{ fontFamily: "var(--font-heading)" }}
             >
               Service de Débarras
             </h1>
-            <p className="text-xl text-white/80 max-w-2xl mx-auto">
+            <p className="text-xl text-white/80 leading-relaxed">
               Nous vidons maisons, appartements, caves et greniers dans tout le
               Luxembourg. Service rapide, propre et professionnel.
             </p>
-          </div>
+          </motion.div>
         </Container>
       </section>
 
@@ -84,27 +109,34 @@ export default function DebarrasPage() {
             subtitle="Un service adapté à chaque situation"
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {debarrasTypes.map((type) => (
-              <div
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 gap-8"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+          >
+            {debarrasTypes.map((type, index) => (
+              <motion.div
                 key={type.title}
-                className="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow"
+                variants={staggerItem}
+                className="group bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100"
               >
-                <div className="w-16 h-16 bg-[var(--color-primary)]/10 rounded-full flex items-center justify-center mb-6 text-[var(--color-primary)]">
+                <div className="w-16 h-16 bg-gradient-to-br from-[var(--color-primary)]/20 to-[var(--color-primary)]/5 rounded-xl flex items-center justify-center mb-6 text-[var(--color-primary)] group-hover:scale-110 transition-transform">
                   {type.icon}
                 </div>
                 <h3
-                  className="text-xl font-semibold mb-3"
+                  className="text-xl font-semibold mb-3 group-hover:text-[var(--color-primary)] transition-colors"
                   style={{ fontFamily: "var(--font-heading)" }}
                 >
                   {type.title}
                 </h3>
-                <p className="text-[var(--color-text-light)]">
+                <p className="text-[var(--color-text-light)] leading-relaxed">
                   {type.description}
                 </p>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </Container>
       </section>
 
@@ -116,19 +148,32 @@ export default function DebarrasPage() {
             subtitle="Un processus simple et transparent"
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {[
-              { step: "1", title: "Contact", description: "Appelez-nous ou remplissez le formulaire de contact" },
-              { step: "2", title: "Visite", description: "Nous nous déplaçons gratuitement pour évaluer" },
-              { step: "3", title: "Devis", description: "Vous recevez un devis détaillé et sans engagement" },
-              { step: "4", title: "Intervention", description: "Notre équipe réalise le débarras à la date convenue" },
-            ].map((item) => (
-              <div key={item.step} className="text-center">
-                <div className="w-12 h-12 bg-[var(--color-primary)] rounded-full flex items-center justify-center mx-auto mb-4">
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-4 gap-8"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+          >
+            {processSteps.map((item, index) => (
+              <motion.div
+                key={item.step}
+                variants={staggerItem}
+                className="text-center relative"
+              >
+                {/* Connector line */}
+                {index < processSteps.length - 1 && (
+                  <div className="hidden md:block absolute top-6 left-[60%] w-[80%] h-0.5 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary)]/30" />
+                )}
+
+                <motion.div
+                  className="w-12 h-12 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-dark)] rounded-full flex items-center justify-center mx-auto mb-4 relative z-10 shadow-lg"
+                  whileHover={{ scale: 1.1 }}
+                >
                   <span className="text-white font-bold text-xl">{item.step}</span>
-                </div>
+                </motion.div>
                 <h3
-                  className="font-semibold mb-2"
+                  className="font-semibold mb-2 text-lg"
                   style={{ fontFamily: "var(--font-heading)" }}
                 >
                   {item.title}
@@ -136,29 +181,40 @@ export default function DebarrasPage() {
                 <p className="text-sm text-[var(--color-text-light)]">
                   {item.description}
                 </p>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </Container>
       </section>
 
       {/* CTA */}
       <section className="section">
         <Container>
-          <div className="text-center">
+          <motion.div
+            className="text-center max-w-2xl mx-auto"
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
             <h2
-              className="text-3xl font-semibold mb-4"
+              className="text-3xl md:text-4xl font-semibold mb-4"
               style={{ fontFamily: "var(--font-heading)" }}
             >
               Besoin d&apos;un débarras ?
             </h2>
-            <p className="text-[var(--color-text-light)] mb-8 max-w-xl mx-auto">
+            <p className="text-[var(--color-text-light)] mb-8 text-lg">
               Contactez-nous dès maintenant pour un devis gratuit et sans engagement.
             </p>
-            <Button href="/contact" variant="primary" size="lg">
-              Demander un devis gratuit
-            </Button>
-          </div>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Button href="/contact" variant="primary" size="lg">
+                Demander un devis gratuit
+              </Button>
+            </motion.div>
+          </motion.div>
         </Container>
       </section>
 

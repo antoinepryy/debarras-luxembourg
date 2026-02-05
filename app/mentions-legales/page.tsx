@@ -1,33 +1,46 @@
-import { Metadata } from "next";
+"use client";
+
+import { motion } from "framer-motion";
 import { Container } from "@/components/ui";
 import { SITE_NAME, CONTACT, SITE_URL } from "@/lib/constants";
-
-export const metadata: Metadata = {
-  title: "Mentions Légales",
-  description: `Mentions légales du site ${SITE_NAME}`,
-};
+import { fadeUp } from "@/lib/animations";
 
 export default function MentionsLegalesPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative py-16 bg-[var(--color-secondary)]">
-        <Container>
-          <div className="text-center text-white">
+      <section className="relative py-20 md:py-24 bg-gradient-to-br from-[var(--color-secondary)] via-[var(--color-secondary-dark)] to-[var(--color-secondary)] overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--color-primary)]/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full blur-2xl" />
+        </div>
+
+        <Container className="relative z-10">
+          <motion.div
+            className="text-center text-white"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
             <h1
               className="text-4xl md:text-5xl font-bold"
               style={{ fontFamily: "var(--font-heading)" }}
             >
               Mentions Légales
             </h1>
-          </div>
+          </motion.div>
         </Container>
       </section>
 
       {/* Content */}
       <section className="section">
         <Container>
-          <div className="max-w-3xl mx-auto prose prose-lg">
+          <motion.div
+            className="max-w-3xl mx-auto prose prose-lg"
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+          >
             <h2 style={{ fontFamily: "var(--font-heading)" }}>1. Éditeur du site</h2>
             <p>
               Le site <strong>{SITE_URL}</strong> est édité par :<br />
@@ -70,8 +83,7 @@ export default function MentionsLegalesPage() {
               service commercial de {SITE_NAME}.
             </p>
             <p>
-              Pour exercer vos droits, vous pouvez nous contacter à l&apos;adresse email :
-              {CONTACT.email}
+              Pour exercer vos droits, vous pouvez nous contacter à l&apos;adresse email : {CONTACT.email}
             </p>
 
             <h2 style={{ fontFamily: "var(--font-heading)" }}>5. Cookies</h2>
@@ -102,7 +114,7 @@ export default function MentionsLegalesPage() {
               - Par email : {CONTACT.email}<br />
               - Par téléphone : {CONTACT.phone}
             </p>
-          </div>
+          </motion.div>
         </Container>
       </section>
     </>
