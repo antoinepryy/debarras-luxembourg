@@ -25,40 +25,8 @@ export function Footer() {
 
   return (
     <footer className="relative bg-gradient-to-b from-[#1a1a1a] to-[#0d0d0d] text-white overflow-hidden">
-      {/* Background decorations */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[var(--color-primary)]/30 to-transparent" />
-        <motion.div
-          className="absolute top-20 -right-32 w-96 h-96 rounded-full"
-          style={{
-            background: "radial-gradient(circle, rgba(245,158,11,0.05) 0%, transparent 70%)",
-          }}
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-        <motion.div
-          className="absolute bottom-20 -left-32 w-80 h-80 rounded-full"
-          style={{
-            background: "radial-gradient(circle, rgba(37,99,235,0.08) 0%, transparent 70%)",
-          }}
-          animate={{
-            scale: [1.2, 1, 1.2],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-      </div>
+      {/* Top border */}
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[var(--color-primary)]/30 to-transparent" />
 
       {/* Main Footer */}
       <div className="container relative py-16 md:py-20">
@@ -78,8 +46,8 @@ export function Footer() {
               {SITE_NAME}
             </motion.h3>
             <p className="text-gray-400 mb-6 text-sm leading-relaxed">
-              Service professionnel de débarras, expertise et rachat d&apos;antiquités
-              au Luxembourg. Plus de 30 ans d&apos;expérience à votre service.
+              Service professionnel de débarras au Luxembourg.
+              Plus de 30 ans d&apos;expérience à votre service.
             </p>
             <div className="flex gap-3">
               <motion.a
@@ -134,20 +102,6 @@ export function Footer() {
                   </Link>
                 </motion.li>
               ))}
-              <motion.li
-                initial={{ opacity: 0, x: -10 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4 }}
-              >
-                <Link
-                  href="/categories"
-                  className="text-gray-400 hover:text-[var(--color-primary)] transition-colors text-sm flex items-center gap-2 group"
-                >
-                  <span className="w-1.5 h-1.5 bg-gray-600 rounded-full group-hover:bg-[var(--color-primary)] transition-colors" />
-                  Catégories d&apos;objets
-                </Link>
-              </motion.li>
             </ul>
           </motion.div>
 
@@ -235,7 +189,7 @@ export function Footer() {
                     </svg>
                   </div>
                   <div>
-                    <p className="text-xs text-gray-500">Appelez-nous</p>
+                    <p className="text-xs text-gray-400">Appelez-nous</p>
                     <p className="text-white font-semibold">{CONTACT.phone}</p>
                   </div>
                 </a>
@@ -261,7 +215,7 @@ export function Footer() {
                     </svg>
                   </div>
                   <div>
-                    <p className="text-xs text-gray-500">Écrivez-nous</p>
+                    <p className="text-xs text-gray-400">Écrivez-nous</p>
                     <p className="text-white font-semibold text-sm truncate">{CONTACT.email}</p>
                   </div>
                 </a>

@@ -6,19 +6,19 @@ import { SITE_NAME, SITE_DESCRIPTION, SITE_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: {
-    default: `${SITE_NAME} - Expertise & Rachat d'antiquités`,
+    default: `${SITE_NAME} - Service de débarras professionnel`,
     template: `%s | ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
   keywords: [
     "débarras luxembourg",
-    "antiquités luxembourg",
-    "rachat antiquités",
-    "expertise objets anciens",
     "débarras maison",
-    "brocante luxembourg",
     "vide maison",
-    "estimation antiquités",
+    "débarras appartement",
+    "débarras cave",
+    "débarras grenier",
+    "évacuation encombrants",
+    "débarras professionnel luxembourg",
   ],
   authors: [{ name: SITE_NAME }],
   creator: SITE_NAME,
@@ -28,12 +28,12 @@ export const metadata: Metadata = {
     locale: "fr_LU",
     url: SITE_URL,
     siteName: SITE_NAME,
-    title: `${SITE_NAME} - Expertise & Rachat d'antiquités`,
+    title: `${SITE_NAME} - Service de débarras professionnel`,
     description: SITE_DESCRIPTION,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_NAME} - Expertise & Rachat d'antiquités`,
+    title: `${SITE_NAME} - Service de débarras professionnel`,
     description: SITE_DESCRIPTION,
   },
   robots: {

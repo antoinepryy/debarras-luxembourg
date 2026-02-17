@@ -10,7 +10,7 @@ const testimonials = [
     name: "Marie Dupont",
     location: "Luxembourg-Ville",
     rating: 5,
-    text: "Service impeccable pour le débarras de la maison de mes parents. L'équipe a été très respectueuse et a même trouvé des objets de valeur que nous ne soupçonnions pas. Je recommande vivement !",
+    text: "Service impeccable pour le débarras de la maison de mes parents. L'équipe a été très respectueuse et a travaillé avec soin. Je recommande vivement !",
     service: "Débarras de maison",
   },
   {
@@ -18,8 +18,8 @@ const testimonials = [
     name: "Jean-Pierre Müller",
     location: "Esch-sur-Alzette",
     rating: 5,
-    text: "Excellente expertise de ma collection de montres anciennes. Des professionnels compétents qui connaissent vraiment leur métier. Le prix proposé pour le rachat était très correct.",
-    service: "Expertise & Rachat",
+    text: "Débarras complet de notre ancien bureau en une journée. L'équipe était ponctuelle, efficace et très soigneuse. Rien à redire, un service vraiment professionnel.",
+    service: "Débarras de bureau",
   },
   {
     id: 3,
@@ -34,7 +34,7 @@ const testimonials = [
     name: "François Schmit",
     location: "Dudelange",
     rating: 5,
-    text: "Après le décès de ma mère, l'équipe a géré le débarras avec beaucoup de délicatesse. Ils ont pris le temps d'expertiser les meubles anciens et m'ont fait une offre de rachat très honnête.",
+    text: "Après le décès de ma mère, l'équipe a géré le débarras avec beaucoup de délicatesse. Ils ont pris le temps de tout évacuer proprement et avec respect. Un grand merci.",
     service: "Succession",
   },
 ];
@@ -98,37 +98,6 @@ export function Testimonials() {
 
   return (
     <section className="section relative overflow-hidden bg-gradient-to-b from-white to-[var(--color-background-alt)]">
-      {/* Background decorations */}
-      <div className="absolute inset-0 pointer-events-none">
-        <motion.div
-          className="absolute top-20 left-10 w-72 h-72 rounded-full"
-          style={{
-            background: "radial-gradient(circle, rgba(245,158,11,0.08) 0%, transparent 70%)",
-          }}
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.5, 0.8, 0.5],
-          }}
-          transition={{ duration: 8, repeat: Infinity }}
-        />
-        <motion.div
-          className="absolute bottom-20 right-10 w-96 h-96 rounded-full"
-          style={{
-            background: "radial-gradient(circle, rgba(37,99,235,0.05) 0%, transparent 70%)",
-          }}
-          animate={{
-            scale: [1.2, 1, 1.2],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{ duration: 10, repeat: Infinity }}
-        />
-
-        {/* Quote marks */}
-        <div className="absolute top-32 left-[15%] text-[200px] font-serif text-[var(--color-primary)]/5 leading-none select-none">
-          "
-        </div>
-      </div>
-
       <Container className="relative">
         <SectionTitle
           title="Ce que nos clients disent"
@@ -167,7 +136,7 @@ export function Testimonials() {
                   {/* Rating and service */}
                   <div className="flex items-center justify-between mb-6">
                     <StarRating rating={testimonials[activeIndex].rating} />
-                    <span className="px-4 py-1.5 bg-[var(--color-primary)]/10 text-[var(--color-primary)] text-sm font-medium rounded-full">
+                    <span className="px-4 py-1.5 bg-[var(--color-primary)]/10 text-[var(--color-primary-dark)] text-sm font-medium rounded-full">
                       {testimonials[activeIndex].service}
                     </span>
                   </div>

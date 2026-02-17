@@ -40,7 +40,7 @@ const debarrasTypes = [
   {
     title: "Débarras de greniers",
     description:
-      "Vidage de greniers et combles, expertise des objets anciens trouvés, possibilité de rachat sur place.",
+      "Vidage de greniers et combles, évacuation de tous les encombrants stockés. Accès difficile pris en charge.",
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8">
         <path d="M21 6.375c0 2.692-4.03 4.875-9 4.875S3 9.067 3 6.375 7.03 1.5 12 1.5s9 2.183 9 4.875z" />

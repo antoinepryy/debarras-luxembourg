@@ -1,7 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import { Container, Button, PhoneBadge } from "@/components/ui";
 import { CONTACT } from "@/lib/constants";
 import { fadeUp } from "@/lib/animations";
@@ -13,106 +12,12 @@ interface ContactCTAProps {
 
 export function ContactCTA({
   title = "Besoin d'un devis gratuit ?",
-  subtitle = "Contactez-nous dès maintenant pour une estimation gratuite et sans engagement. Nous nous déplaçons dans tout le Luxembourg.",
+  subtitle = "Contactez-nous dès maintenant pour un devis gratuit et sans engagement. Nous nous déplaçons dans tout le Luxembourg.",
 }: ContactCTAProps) {
-  const containerRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
-
   return (
-    <section
-      ref={containerRef}
-      className="relative py-24 md:py-32 overflow-hidden"
-    >
-      {/* Animated gradient background */}
-      <motion.div
-        className="absolute inset-0 bg-gradient-to-br from-[var(--color-secondary)] via-[#1e3a8a] to-[var(--color-secondary-dark)]"
-        animate={{
-          backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: "linear",
-        }}
-        style={{
-          backgroundSize: "400% 400%",
-        }}
-      />
-
-      {/* Animated shapes */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Large floating orb */}
-        <motion.div
-          className="absolute -top-32 -right-32 w-[400px] h-[400px] rounded-full"
-          style={{
-            background: "radial-gradient(circle, rgba(245,158,11,0.2) 0%, transparent 70%)",
-            y,
-          }}
-          animate={{
-            scale: [1, 1.2, 1],
-            rotate: [0, 180, 360],
-          }}
-          transition={{
-            duration: 30,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        />
-
-        {/* Small floating orbs */}
-        <motion.div
-          className="absolute top-1/4 left-1/4 w-20 h-20 rounded-full bg-white/5"
-          animate={{
-            y: [0, -30, 0],
-            x: [0, 20, 0],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-        <motion.div
-          className="absolute bottom-1/4 right-1/3 w-16 h-16 rounded-full bg-[var(--color-primary)]/10"
-          animate={{
-            y: [0, 20, 0],
-            x: [0, -15, 0],
-          }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 2,
-          }}
-        />
-
-        {/* Decorative lines */}
-        <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
-          <motion.path
-            d="M0,100 Q400,50 800,100 T1600,100"
-            fill="none"
-            stroke="rgba(245,158,11,0.1)"
-            strokeWidth="2"
-            initial={{ pathLength: 0 }}
-            whileInView={{ pathLength: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 2, ease: "easeInOut" }}
-          />
-        </svg>
-
-        {/* Pattern overlay */}
-        <div
-          className="absolute inset-0 opacity-5"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }}
-        />
-      </div>
+    <section className="relative py-24 md:py-32 overflow-hidden">
+      {/* Static gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-primary-dark)] via-[var(--color-primary)] to-[var(--color-primary-dark)]" />
 
       <Container className="relative z-10">
         <motion.div
@@ -130,11 +35,7 @@ export function ContactCTA({
             transition={{ delay: 0.2 }}
             className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full mb-8 border border-white/10"
           >
-            <motion.span
-              className="w-2 h-2 bg-[var(--color-primary)] rounded-full"
-              animate={{ scale: [1, 1.5, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
+            <span className="w-2 h-2 bg-white rounded-full" />
             <span className="text-sm text-white/90">Réponse sous 24h</span>
           </motion.div>
 
@@ -148,9 +49,9 @@ export function ContactCTA({
             {title}
           </motion.h2>
 
-          {/* Animated underline */}
+          {/* Underline */}
           <motion.div
-            className="w-24 h-1 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-dark)] mx-auto mb-6 rounded-full"
+            className="w-24 h-1 bg-gradient-to-r from-white to-white/50 mx-auto mb-6 rounded-full"
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
@@ -175,15 +76,12 @@ export function ContactCTA({
             <motion.div
               whileHover={{ scale: 1.05, y: -3 }}
               whileTap={{ scale: 0.95 }}
-              className="relative group"
             >
-              {/* Glow effect */}
-              <div className="absolute inset-0 bg-[var(--color-primary)] rounded-lg blur-lg opacity-50 group-hover:opacity-75 transition-opacity" />
               <Button
                 href="/contact"
                 variant="primary"
                 size="lg"
-                className="relative shadow-2xl"
+                className="shadow-2xl"
               >
                 Demander un devis
               </Button>
@@ -215,10 +113,9 @@ export function ContactCTA({
               { icon: "clock", text: "7j/7" },
               { icon: "location", text: "Tout Luxembourg" },
             ].map((item) => (
-              <motion.div
+              <div
                 key={item.text}
                 className="flex items-center gap-2 text-white/70"
-                whileHover={{ scale: 1.05, color: "rgba(255,255,255,0.9)" }}
               >
                 <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
                   {item.icon === "shield" && (
@@ -238,7 +135,7 @@ export function ContactCTA({
                   )}
                 </div>
                 <span className="text-sm font-medium">{item.text}</span>
-              </motion.div>
+              </div>
             ))}
           </motion.div>
         </motion.div>

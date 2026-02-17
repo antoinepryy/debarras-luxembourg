@@ -86,26 +86,10 @@ export function FloatingContact() {
         className="relative w-16 h-16 rounded-full bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-dark)] shadow-lg hover:shadow-xl flex items-center justify-center"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
-        animate={{
-          boxShadow: isOpen
-            ? "0 10px 40px rgba(212, 175, 55, 0.4)"
-            : "0 10px 30px rgba(212, 175, 55, 0.3)",
+        style={{
+          boxShadow: "0 10px 30px rgba(22, 163, 74, 0.3)",
         }}
       >
-        {/* Pulse animation */}
-        <motion.div
-          className="absolute inset-0 rounded-full bg-[var(--color-primary)]"
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.5, 0, 0.5],
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-
         <motion.div
           animate={{ rotate: isOpen ? 45 : 0 }}
           transition={{ duration: 0.2 }}

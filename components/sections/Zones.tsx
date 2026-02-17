@@ -73,19 +73,6 @@ function ZoneCard({ zone, index }: { zone: (typeof ZONES)[0]; index: number }) {
             />
           </motion.svg>
 
-          {/* Pulse effect */}
-          <motion.div
-            className="absolute inset-0 rounded-full bg-[var(--color-primary)]"
-            initial={{ scale: 1, opacity: 0 }}
-            animate={{
-              scale: isHovered ? [1, 1.5, 1.5] : 1,
-              opacity: isHovered ? [0.3, 0, 0] : 0,
-            }}
-            transition={{
-              duration: 1,
-              repeat: isHovered ? Infinity : 0,
-            }}
-          />
         </motion.div>
 
         {/* Name */}
@@ -102,15 +89,10 @@ export function Zones({ limit = 12 }: ZonesProps) {
 
   return (
     <section className="section relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-gradient-to-br from-[var(--color-primary)]/5 to-transparent blur-3xl" />
-      </div>
-
       <Container className="relative">
         <SectionTitle
           title="Zones d'Intervention"
-          subtitle="Nous intervenons dans tout le Luxembourg pour vos besoins de débarras et d'expertise."
+          subtitle="Nous intervenons dans tout le Luxembourg pour vos besoins de débarras."
         />
 
         <motion.div

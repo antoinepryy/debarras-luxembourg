@@ -35,7 +35,7 @@ export function Header() {
     <>
       {/* Top Bar */}
       <motion.div
-        className="bg-gradient-to-r from-[var(--color-secondary)] via-[#4a0808] to-[var(--color-secondary)] text-white py-2.5 hidden md:block"
+        className="bg-gradient-to-r from-[var(--color-secondary)] to-[var(--color-secondary-dark)] text-white py-2.5 hidden md:block"
         initial={{ y: -40 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
@@ -119,17 +119,7 @@ export function Header() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-dark)] rounded-xl"
-                  animate={{
-                    rotate: [0, 5, 0],
-                  }}
-                  transition={{
-                    duration: 4,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                />
+                <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-dark)] rounded-xl" />
                 <div className="absolute inset-0 flex items-center justify-center">
                   <span
                     className="text-white text-xl font-bold"
@@ -138,18 +128,6 @@ export function Header() {
                     DL
                   </span>
                 </div>
-                {/* Shine effect */}
-                <motion.div
-                  className="absolute inset-0 rounded-xl overflow-hidden"
-                  initial={{ opacity: 0 }}
-                  whileHover={{ opacity: 1 }}
-                >
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full"
-                    animate={{ translateX: ["100%", "-100%"] }}
-                    transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 2 }}
-                  />
-                </motion.div>
               </motion.div>
               <div>
                 <motion.span
@@ -164,7 +142,7 @@ export function Header() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6 }}
                 >
-                  Expertise & Rachat d&apos;antiquités
+                  Service de débarras professionnel
                 </motion.span>
               </div>
             </Link>
@@ -174,32 +152,19 @@ export function Header() {
 
             {/* Right Section */}
             <div className="flex items-center gap-3">
-              {/* Phone - Desktop */}
+              {/* Phone - Always visible */}
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="hidden lg:block"
               >
                 <Link
                   href={`tel:${CONTACT.phone.replace(/\s/g, "")}`}
-                  className="relative overflow-hidden flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-dark)] text-white rounded-xl font-medium shadow-lg shadow-[var(--color-primary)]/20 hover:shadow-[var(--color-primary)]/40 transition-all duration-300 group"
+                  className="flex items-center gap-2 px-3 py-2 sm:px-5 sm:py-2.5 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-dark)] text-white rounded-xl font-medium shadow-lg shadow-[var(--color-primary)]/20 hover:shadow-[var(--color-primary)]/40 transition-all duration-300"
                 >
-                  <motion.span
-                    animate={{ rotate: [0, 15, -15, 0] }}
-                    transition={{ duration: 0.5, repeat: Infinity, repeatDelay: 4 }}
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
-                      <path fillRule="evenodd" d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z" clipRule="evenodd" />
-                    </svg>
-                  </motion.span>
-                  <span>{CONTACT.phoneDisplay}</span>
-                  {/* Shine effect */}
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-                    initial={{ x: "-100%" }}
-                    whileHover={{ x: "100%" }}
-                    transition={{ duration: 0.5 }}
-                  />
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
+                    <path fillRule="evenodd" d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z" clipRule="evenodd" />
+                  </svg>
+                  <span className="hidden sm:inline">{CONTACT.phoneDisplay}</span>
                 </Link>
               </motion.div>
 

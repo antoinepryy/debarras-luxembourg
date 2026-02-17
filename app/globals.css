@@ -4,20 +4,20 @@
 @import "tailwindcss";
 
 :root {
-  /* Couleurs principales - Palette moderne et sophistiquée */
-  --color-primary: #2563eb; /* Bleu vif moderne */
-  --color-primary-dark: #1d4ed8;
-  --color-primary-light: #3b82f6;
+  /* Couleurs principales - Vert confiance, propreté, eco */
+  --color-primary: #16a34a; /* Vert-600 */
+  --color-primary-dark: #15803d; /* Vert-700 */
+  --color-primary-light: #22c55e; /* Vert-500 */
 
-  /* Accent doré luxueux */
-  --color-accent: #f59e0b; /* Ambre moderne */
-  --color-accent-dark: #d97706;
-  --color-accent-light: #fbbf24;
+  /* Accent - Orange énergie, action */
+  --color-accent: #f97316; /* Orange-500 */
+  --color-accent-dark: #ea580c; /* Orange-600 */
+  --color-accent-light: #fb923c; /* Orange-400 */
 
-  /* Secondary - Slate profond */
-  --color-secondary: #0f172a; /* Slate très foncé */
-  --color-secondary-dark: #020617;
-  --color-secondary-light: #1e293b;
+  /* Secondary - Gray neutre */
+  --color-secondary: #1f2937; /* Gray-800 */
+  --color-secondary-dark: #111827; /* Gray-900 */
+  --color-secondary-light: #374151; /* Gray-700 */
 
   /* Couleurs de fond */
   --color-background: #ffffff;
@@ -27,7 +27,7 @@
   /* Couleurs de texte */
   --color-text: #0f172a;
   --color-text-light: #475569;
-  --color-text-muted: #94a3b8;
+  --color-text-muted: #64748b;
 
   /* Typographie moderne */
   --font-heading: 'Plus Jakarta Sans', sans-serif;
@@ -35,7 +35,7 @@
 
   /* Espacements */
   --section-padding: 100px;
-  --container-max-width: 1280px;
+  --container-max-width: 1440px;
 
   /* Ombres modernes avec teinte colorée */
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
@@ -45,8 +45,8 @@
   --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
   --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.04), 0 6px 16px rgba(0, 0, 0, 0.06);
   --shadow-card-hover: 0 8px 30px rgba(0, 0, 0, 0.12);
-  --shadow-primary: 0 10px 40px -10px rgba(37, 99, 235, 0.4);
-  --shadow-accent: 0 10px 40px -10px rgba(245, 158, 11, 0.4);
+  --shadow-primary: 0 10px 40px -10px rgba(22, 163, 74, 0.4);
+  --shadow-accent: 0 10px 40px -10px rgba(249, 115, 22, 0.4);
 
   /* Transitions fluides */
   --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -179,18 +179,18 @@ a:hover {
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 14px 44px -10px rgba(37, 99, 235, 0.5);
+  box-shadow: 0 14px 44px -10px rgba(22, 163, 74, 0.5);
 }
 
 .btn-secondary {
   background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-secondary-dark) 100%);
   color: white;
-  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.3);
+  box-shadow: 0 4px 15px rgba(31, 41, 55, 0.3);
 }
 
 .btn-secondary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(15, 23, 42, 0.4);
+  box-shadow: 0 8px 25px rgba(31, 41, 55, 0.4);
 }
 
 .btn-accent {
@@ -201,7 +201,7 @@ a:hover {
 
 .btn-accent:hover {
   transform: translateY(-2px);
-  box-shadow: 0 14px 44px -10px rgba(245, 158, 11, 0.5);
+  box-shadow: 0 14px 44px -10px rgba(249, 115, 22, 0.5);
 }
 
 .btn-outline {
@@ -307,10 +307,10 @@ a:hover {
 
 @keyframes pulse-glow {
   0%, 100% {
-    box-shadow: 0 0 20px rgba(37, 99, 235, 0.4);
+    box-shadow: 0 0 20px rgba(22, 163, 74, 0.4);
   }
   50% {
-    box-shadow: 0 0 40px rgba(37, 99, 235, 0.6);
+    box-shadow: 0 0 40px rgba(22, 163, 74, 0.6);
   }
 }
 
@@ -335,15 +335,6 @@ a:hover {
   }
 }
 
-@keyframes spin-slow {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 .animate-float {
   animation: float 6s ease-in-out infinite;
 }
@@ -363,10 +354,6 @@ a:hover {
   animation: gradient-shift 5s ease infinite;
 }
 
-.animate-spin-slow {
-  animation: spin-slow 20s linear infinite;
-}
-
 /* Glassmorphism moderne */
 .glass {
   background: rgba(255, 255, 255, 0.7);
@@ -376,7 +363,7 @@ a:hover {
 }
 
 .glass-dark {
-  background: rgba(15, 23, 42, 0.8);
+  background: rgba(31, 41, 55, 0.8);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -385,13 +372,6 @@ a:hover {
 /* Gradient text moderne */
 .text-gradient {
   background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.text-gradient-gold {
-  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -488,12 +468,12 @@ img:not([loading="lazy"]) {
 }
 
 .bg-grid {
-  background-image: linear-gradient(rgba(37, 99, 235, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(37, 99, 235, 0.03) 1px, transparent 1px);
+  background-image: linear-gradient(rgba(22, 163, 74, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(22, 163, 74, 0.03) 1px, transparent 1px);
   background-size: 40px 40px;
 }
 
 .bg-dots {
-  background-image: radial-gradient(rgba(37, 99, 235, 0.15) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(22, 163, 74, 0.15) 1px, transparent 1px);
   background-size: 20px 20px;
 }

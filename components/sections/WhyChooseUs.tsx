@@ -1,7 +1,6 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { Container } from "@/components/ui";
 
 const features = [
@@ -11,9 +10,9 @@ const features = [
         <path fillRule="evenodd" d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clipRule="evenodd" />
       </svg>
     ),
-    title: "30+ ans d'expertise",
-    description: "Une expérience inégalée dans l'expertise et le rachat d'antiquités au Luxembourg.",
-    color: "from-amber-500 to-orange-600",
+    title: "30+ ans d'expérience",
+    description: "Une expérience inégalée dans le débarras professionnel au Luxembourg.",
+    color: "from-[var(--color-primary)] to-[var(--color-primary-dark)]",
   },
   {
     icon: (
@@ -22,9 +21,9 @@ const features = [
         <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 6a.75.75 0 00-1.5 0v.816a3.836 3.836 0 00-1.72.756c-.712.566-1.112 1.35-1.112 2.178 0 .829.4 1.612 1.113 2.178.502.4 1.102.647 1.719.756v2.978a2.536 2.536 0 01-.921-.421l-.879-.66a.75.75 0 00-.9 1.2l.879.66c.533.4 1.169.645 1.821.75V18a.75.75 0 001.5 0v-.81a4.124 4.124 0 001.821-.749c.745-.559 1.179-1.344 1.179-2.191 0-.847-.434-1.632-1.179-2.191a4.122 4.122 0 00-1.821-.75V8.354c.29.082.559.213.786.393l.415.33a.75.75 0 00.933-1.175l-.415-.33a3.836 3.836 0 00-1.719-.755V6z" clipRule="evenodd" />
       </svg>
     ),
-    title: "Paiement comptant",
-    description: "Rachat immédiat de vos objets de valeur avec paiement sur place.",
-    color: "from-emerald-500 to-teal-600",
+    title: "Devis gratuit",
+    description: "Devis et déplacement gratuits, sans engagement de votre part.",
+    color: "from-[var(--color-accent)] to-[var(--color-accent-dark)]",
   },
   {
     icon: (
@@ -35,8 +34,8 @@ const features = [
       </svg>
     ),
     title: "Déplacement gratuit",
-    description: "Nous nous déplaçons gratuitement dans tout le Luxembourg pour évaluer vos biens.",
-    color: "from-blue-500 to-indigo-600",
+    description: "Nous nous déplaçons gratuitement dans tout le Luxembourg pour évaluer vos besoins.",
+    color: "from-[var(--color-primary-light)] to-[var(--color-primary)]",
   },
   {
     icon: (
@@ -46,7 +45,7 @@ const features = [
     ),
     title: "Service garanti",
     description: "Qualité de service garantie avec une équipe professionnelle et respectueuse.",
-    color: "from-purple-500 to-pink-600",
+    color: "from-[var(--color-accent-light)] to-[var(--color-accent)]",
   },
 ];
 
@@ -59,31 +58,16 @@ function FeatureCard({ feature, index }: { feature: typeof features[0]; index: n
       transition={{ delay: index * 0.15, duration: 0.5 }}
       className="relative group"
     >
-      <motion.div
-        className="relative bg-white rounded-3xl p-8 h-full overflow-hidden border border-gray-100"
-        whileHover={{ y: -10 }}
-        transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      >
-        {/* Gradient background on hover */}
-        <motion.div
-          className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}
-        />
-
+      <div className="relative bg-white rounded-3xl p-8 h-full overflow-hidden border border-gray-100 hover:shadow-lg hover:-translate-y-2 transition-all duration-300">
         {/* Decorative corner */}
         <div className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-gray-50 to-gray-100 rounded-full opacity-50" />
 
         {/* Icon */}
-        <motion.div
+        <div
           className={`relative w-16 h-16 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center text-white mb-6 shadow-lg`}
-          whileHover={{ scale: 1.1, rotate: 5 }}
-          transition={{ type: "spring", stiffness: 300 }}
         >
           {feature.icon}
-          {/* Glow effect */}
-          <motion.div
-            className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${feature.color} blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-500`}
-          />
-        </motion.div>
+        </div>
 
         {/* Content */}
         <h3
@@ -95,57 +79,14 @@ function FeatureCard({ feature, index }: { feature: typeof features[0]; index: n
         <p className="relative text-[var(--color-text-light)] leading-relaxed">
           {feature.description}
         </p>
-
-        {/* Bottom accent */}
-        <motion.div
-          className={`absolute bottom-0 left-0 h-1 bg-gradient-to-r ${feature.color}`}
-          initial={{ width: "0%" }}
-          whileHover={{ width: "100%" }}
-          transition={{ duration: 0.3 }}
-        />
-      </motion.div>
+      </div>
     </motion.div>
   );
 }
 
 export function WhyChooseUs() {
-  const containerRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
-
   return (
-    <section ref={containerRef} className="section relative overflow-hidden">
-      {/* Animated background */}
-      <div className="absolute inset-0 pointer-events-none">
-        <motion.div
-          className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full"
-          style={{
-            background: "radial-gradient(circle, rgba(245,158,11,0.08) 0%, transparent 60%)",
-            y,
-          }}
-        />
-        <motion.div
-          className="absolute bottom-0 right-1/4 w-[500px] h-[500px] rounded-full"
-          style={{
-            background: "radial-gradient(circle, rgba(37,99,235,0.06) 0%, transparent 60%)",
-            y: useTransform(scrollYProgress, [0, 1], [-50, 50]),
-          }}
-        />
-
-        {/* Grid pattern */}
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage: `linear-gradient(var(--color-primary) 1px, transparent 1px), linear-gradient(90deg, var(--color-primary) 1px, transparent 1px)`,
-            backgroundSize: "50px 50px",
-          }}
-        />
-      </div>
-
+    <section className="section relative overflow-hidden">
       <Container className="relative">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
@@ -155,12 +96,8 @@ export function WhyChooseUs() {
             viewport={{ once: true }}
             className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--color-primary)]/10 rounded-full mb-6"
           >
-            <motion.span
-              className="w-2 h-2 bg-[var(--color-primary)] rounded-full"
-              animate={{ scale: [1, 1.5, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-            <span className="text-sm font-medium text-[var(--color-primary)]">Nos avantages</span>
+            <span className="w-2 h-2 bg-[var(--color-primary)] rounded-full" />
+            <span className="text-sm font-medium text-[var(--color-primary-dark)]">Nos avantages</span>
           </motion.div>
 
           <motion.h2
@@ -174,7 +111,7 @@ export function WhyChooseUs() {
           </motion.h2>
 
           <motion.div
-            className="w-24 h-1 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] mx-auto mb-6 rounded-full"
+            className="w-24 h-1 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] mx-auto mb-6 rounded-full"
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
@@ -188,7 +125,7 @@ export function WhyChooseUs() {
             transition={{ delay: 0.2 }}
             className="text-lg text-[var(--color-text-light)]"
           >
-            Depuis plus de 30 ans, nous accompagnons les particuliers et professionnels du Luxembourg avec un service de qualité et une expertise reconnue.
+            Depuis plus de 30 ans, nous accompagnons les particuliers et professionnels du Luxembourg avec un service de débarras de qualité.
           </motion.p>
         </div>
 
@@ -214,16 +151,14 @@ export function WhyChooseUs() {
             whileTap={{ scale: 0.95 }}
           >
             <span>Demander un devis gratuit</span>
-            <motion.svg
+            <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              className="w-5 h-5"
-              animate={{ x: [0, 5, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
+              className="w-5 h-5 group-hover:translate-x-1 transition-transform"
             >
               <path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd" />
-            </motion.svg>
+            </svg>
           </motion.a>
         </motion.div>
       </Container>

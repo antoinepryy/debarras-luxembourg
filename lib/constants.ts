@@ -1,5 +1,5 @@
 export const SITE_NAME = "Débarras Luxembourg";
-export const SITE_DESCRIPTION = "Service de débarras, expertise et rachat d'antiquités au Luxembourg. Déplacement gratuit, paiement comptant.";
+export const SITE_DESCRIPTION = "Service de débarras professionnel au Luxembourg. Devis et déplacement gratuits.";
 export const SITE_URL = "https://debarras-luxembourg.lu";
 
 export const CONTACT = {
@@ -17,20 +17,6 @@ export const SOCIAL_LINKS = {
 export const NAV_ITEMS = [
   { label: "Accueil", href: "/" },
   { label: "Débarras", href: "/debarras" },
-  { label: "Expertise", href: "/expertise" },
-  { label: "Rachat", href: "/rachat" },
-  {
-    label: "Catégories",
-    href: "/categories",
-    children: [
-      { label: "Mobilier ancien", href: "/categories/mobilier-ancien" },
-      { label: "Argenterie", href: "/categories/argenterie" },
-      { label: "Joaillerie", href: "/categories/joaillerie" },
-      { label: "Horlogerie", href: "/categories/horlogerie" },
-      { label: "Arts asiatiques", href: "/categories/arts-asiatiques" },
-      { label: "Tableaux", href: "/categories/tableaux" },
-    ],
-  },
   { label: "Zones d'intervention", href: "/zones-intervention" },
   { label: "Contact", href: "/contact" },
 ];
@@ -44,33 +30,33 @@ export const SERVICES = [
     icon: "truck",
   },
   {
-    id: "expertise",
-    title: "Expertise",
-    description: "Expertise gratuite de vos objets anciens et antiquités. Déplacement à domicile sans engagement.",
-    href: "/expertise",
-    icon: "magnifying-glass",
+    id: "debarras-locaux",
+    title: "Débarras de locaux",
+    description: "Vidage complet de maisons, appartements, bureaux et commerces. Intervention rapide et soignée.",
+    href: "/debarras",
+    icon: "building",
   },
   {
-    id: "rachat",
-    title: "Rachat",
-    description: "Rachat immédiat de vos antiquités, objets d'art et objets de valeur. Paiement comptant.",
-    href: "/rachat",
-    icon: "currency-euro",
+    id: "evacuation",
+    title: "Évacuation d'encombrants",
+    description: "Évacuation de caves, greniers et garages. Nous prenons en charge tous types d'encombrants.",
+    href: "/debarras",
+    icon: "box",
   },
 ];
 
 export const FEATURES = [
   {
     title: "Déplacement gratuit",
-    description: "Nous nous déplaçons gratuitement dans tout le Luxembourg pour évaluer vos biens.",
+    description: "Nous nous déplaçons gratuitement dans tout le Luxembourg pour évaluer vos besoins.",
   },
   {
-    title: "Expertise professionnelle",
-    description: "Plus de 30 ans d'expérience dans l'estimation d'antiquités et objets de valeur.",
+    title: "Équipe professionnelle",
+    description: "Plus de 30 ans d'expérience dans le débarras professionnel au Luxembourg.",
   },
   {
-    title: "Paiement comptant",
-    description: "Règlement immédiat en espèces ou par virement lors de l'achat de vos objets.",
+    title: "Devis gratuit",
+    description: "Devis détaillé et sans engagement, établi sur place lors de notre visite.",
   },
   {
     title: "Discrétion assurée",

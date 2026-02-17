@@ -241,8 +241,7 @@ export function ContactForm() {
             >
               <option value="">Sélectionnez un sujet</option>
               <option value="debarras">Demande de débarras</option>
-              <option value="expertise">Expertise d&apos;objets</option>
-              <option value="rachat">Rachat d&apos;antiquités</option>
+              <option value="devis">Demande de devis</option>
               <option value="autre">Autre demande</option>
             </select>
             <div className={`absolute left-3 top-1/2 -translate-y-1/2 transition-colors duration-300 ${focusedField === "subject" ? "text-[var(--color-primary)]" : "text-gray-400"}`}>

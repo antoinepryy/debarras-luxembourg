@@ -2,7 +2,6 @@ import {
   Hero,
   Services,
   WhyChooseUs,
-  Categories,
   AboutFamily,
   Testimonials,
   FAQ,
@@ -16,7 +15,6 @@ export default function HomePage() {
       <Hero />
       <Services />
       <WhyChooseUs />
-      <Categories limit={8} />
       <AboutFamily />
       <Testimonials />
       <FAQ />

@@ -7,15 +7,15 @@ import { Container, SectionTitle } from "@/components/ui";
 const faqs = [
   {
     question: "Comment fonctionne votre service de débarras ?",
-    answer: "Nous commençons par une visite gratuite pour évaluer le volume et la nature des objets. Nous vous fournissons ensuite un devis détaillé. Si vous acceptez, nous planifions l'intervention à la date qui vous convient. Notre équipe se charge de tout : tri, évacuation, nettoyage. Les objets de valeur peuvent être rachetés, réduisant ainsi le coût du débarras.",
+    answer: "Nous commençons par une visite gratuite pour évaluer le volume et la nature des objets à évacuer. Nous vous fournissons ensuite un devis détaillé. Si vous acceptez, nous planifions l'intervention à la date qui vous convient. Notre équipe se charge de tout : évacuation et nettoyage des lieux.",
   },
   {
     question: "Le déplacement pour le devis est-il payant ?",
     answer: "Non, le déplacement et le devis sont entièrement gratuits et sans engagement. Nous nous déplaçons dans tout le Luxembourg pour évaluer vos besoins et vous proposer une estimation précise.",
   },
   {
-    question: "Quels types d'objets rachetez-vous ?",
-    answer: "Nous rachetons une large gamme d'objets : mobilier ancien, argenterie, bijoux, montres, tableaux, sculptures, porcelaines, livres anciens, instruments de musique, et bien plus. Chaque objet est expertisé par nos spécialistes pour vous garantir un prix juste.",
+    question: "Quels types de locaux débarrassez-vous ?",
+    answer: "Nous intervenons dans tous types de locaux : maisons, appartements, caves, greniers, garages, bureaux, commerces et locaux industriels. Que ce soit pour un vidage complet ou partiel, nous nous adaptons à votre situation.",
   },
   {
     question: "Combien de temps prend une intervention ?",
@@ -23,11 +23,11 @@ const faqs = [
   },
   {
     question: "Intervenez-vous pour les successions ?",
-    answer: "Oui, nous sommes spécialisés dans les débarras de succession. Nous travaillons avec délicatesse et respect, en prenant le temps d'identifier les objets de valeur qui peuvent être rachetés. Nous pouvons également nous coordonner avec les notaires si nécessaire.",
+    answer: "Oui, nous sommes spécialisés dans les débarras de succession. Nous travaillons avec délicatesse et respect. Nous pouvons également nous coordonner avec les notaires si nécessaire.",
   },
   {
     question: "Que faites-vous des objets après le débarras ?",
-    answer: "Les objets de valeur sont rachetés ou mis en vente. Les objets en bon état sont donnés à des associations. Les matériaux recyclables sont triés et envoyés en filière de recyclage. Seuls les déchets non valorisables sont évacués en déchetterie, dans le respect des normes environnementales.",
+    answer: "Les objets en bon état sont donnés à des associations. Les matériaux recyclables sont triés et envoyés en filière de recyclage. Les déchets non valorisables sont évacués en déchetterie, dans le respect des normes environnementales.",
   },
 ];
 
@@ -61,7 +61,7 @@ function FAQItem({ faq, index, isOpen, onToggle }: {
               className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 font-bold text-sm ${
                 isOpen
                   ? "bg-[var(--color-primary)] text-white"
-                  : "bg-[var(--color-primary)]/10 text-[var(--color-primary)]"
+                  : "bg-[var(--color-primary)]/10 text-[var(--color-primary-dark)]"
               }`}
               animate={{ rotate: isOpen ? 0 : 0 }}
             >
@@ -116,38 +116,6 @@ export function FAQ() {
 
   return (
     <section className="section relative overflow-hidden bg-[var(--color-background-alt)]">
-      {/* Background decorations */}
-      <div className="absolute inset-0 pointer-events-none">
-        <motion.div
-          className="absolute -top-40 -right-40 w-80 h-80 rounded-full"
-          style={{
-            background: "radial-gradient(circle, rgba(245,158,11,0.1) 0%, transparent 70%)",
-          }}
-          animate={{
-            scale: [1, 1.2, 1],
-          }}
-          transition={{ duration: 10, repeat: Infinity }}
-        />
-        <motion.div
-          className="absolute -bottom-40 -left-40 w-96 h-96 rounded-full"
-          style={{
-            background: "radial-gradient(circle, rgba(37,99,235,0.05) 0%, transparent 70%)",
-          }}
-          animate={{
-            scale: [1.2, 1, 1.2],
-          }}
-          transition={{ duration: 12, repeat: Infinity }}
-        />
-
-        {/* Question mark decorations */}
-        <div className="absolute top-20 left-[10%] text-[var(--color-primary)]/5 text-[200px] font-serif select-none">
-          ?
-        </div>
-        <div className="absolute bottom-20 right-[10%] text-[var(--color-primary)]/5 text-[150px] font-serif select-none rotate-12">
-          ?
-        </div>
-      </div>
-
       <Container className="relative">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           {/* Left column - Title and info */}
@@ -166,7 +134,7 @@ export function FAQ() {
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 text-[var(--color-primary)]">
                   <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM8.94 6.94a.75.75 0 11-1.061-1.061 3 3 0 112.871 5.026v.345a.75.75 0 01-1.5 0v-.5c0-.72.57-1.172 1.081-1.287A1.5 1.5 0 108.94 6.94zM10 15a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
                 </svg>
-                <span className="text-sm font-medium text-[var(--color-primary)]">FAQ</span>
+                <span className="text-sm font-medium text-[var(--color-primary-dark)]">FAQ</span>
               </motion.div>
 
               <h2
@@ -185,7 +153,7 @@ export function FAQ() {
               />
 
               <p className="text-[var(--color-text-light)] leading-relaxed mb-8">
-                Retrouvez les réponses aux questions les plus courantes sur nos services de débarras et d&apos;expertise.
+                Retrouvez les réponses aux questions les plus courantes sur nos services de débarras.
               </p>
 
               <motion.div
@@ -205,7 +173,7 @@ export function FAQ() {
                 </div>
                 <a
                   href="/contact"
-                  className="flex items-center justify-center gap-2 w-full py-3 bg-[var(--color-primary)]/10 hover:bg-[var(--color-primary)]/20 text-[var(--color-primary)] font-medium rounded-xl transition-colors"
+                  className="flex items-center justify-center gap-2 w-full py-3 bg-[var(--color-primary)]/10 hover:bg-[var(--color-primary)]/20 text-[var(--color-primary-dark)] font-medium rounded-xl transition-colors"
                 >
                   Contactez-nous
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">

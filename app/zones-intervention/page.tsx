@@ -41,7 +41,7 @@ export default function ZonesPage() {
             </h1>
             <p className="text-xl text-white/80 leading-relaxed">
               Nous nous déplaçons gratuitement dans tout le Grand-Duché de Luxembourg
-              pour vos besoins de débarras et d&apos;expertise.
+              pour vos besoins de débarras.
             </p>
           </motion.div>
         </Container>
