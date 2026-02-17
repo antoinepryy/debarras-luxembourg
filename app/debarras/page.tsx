@@ -63,11 +63,15 @@ export default function DebarrasPage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative py-24 md:py-32 bg-gradient-to-br from-[var(--color-secondary)] via-[var(--color-secondary-dark)] to-[var(--color-secondary)] overflow-hidden">
-        {/* Background decorations */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--color-primary)]/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full blur-2xl" />
+      <section className="relative py-24 md:py-32 overflow-hidden">
+        {/* Background image */}
+        <div className="absolute inset-0">
+          <img
+            src="/images/debarras/debarras-hero.jpg"
+            alt="Service de débarras"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/55" />
         </div>
 
         <Container className="relative z-10">
@@ -187,8 +191,50 @@ export default function DebarrasPage() {
         </Container>
       </section>
 
-      {/* CTA */}
+      {/* Galerie - Nos réalisations */}
       <section className="section">
+        <Container>
+          <SectionTitle
+            title="Nos réalisations"
+            subtitle="Quelques exemples de nos interventions de débarras"
+          />
+
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+          >
+            {[
+              { src: "/images/debarras/gallery-avant.jpg", alt: "Avant débarras - pièce encombrée", label: "Avant débarras" },
+              { src: "/images/debarras/gallery-apres.jpg", alt: "Après débarras - pièce vide et propre", label: "Après débarras" },
+              { src: "/images/debarras/gallery-interieur.jpg", alt: "Intérieur nettoyé après intervention", label: "Résultat final" },
+            ].map((img) => (
+              <motion.div
+                key={img.src}
+                variants={staggerItem}
+                className="group relative h-72 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300"
+              >
+                <img
+                  src={img.src}
+                  alt={img.alt}
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                <div className="absolute bottom-4 left-4">
+                  <span className="px-3 py-1.5 bg-white/90 backdrop-blur-sm rounded-lg text-sm font-medium text-[var(--color-text)]">
+                    {img.label}
+                  </span>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </Container>
+      </section>
+
+      {/* CTA */}
+      <section className="section bg-[var(--color-background-alt)]">
         <Container>
           <motion.div
             className="text-center max-w-2xl mx-auto"

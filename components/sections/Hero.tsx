@@ -58,13 +58,20 @@ export function Hero({
       ref={containerRef}
       className="relative min-h-[100vh] flex items-center overflow-hidden"
     >
-      {/* Gradient Background */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background: "linear-gradient(135deg, #15803d 0%, #16a34a 40%, #166534 70%, #14532d 100%)",
-        }}
-      />
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <img
+          src="/images/hero/hero-bg.jpg"
+          alt="Débarras Luxembourg"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background: "linear-gradient(135deg, rgba(17,24,39,0.82) 0%, rgba(17,24,39,0.72) 50%, rgba(30,58,138,0.75) 100%)",
+          }}
+        />
+      </div>
 
       {/* Content */}
       <motion.div style={{ y, opacity }} className="relative z-10 w-full">

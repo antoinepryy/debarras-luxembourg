@@ -31,42 +31,53 @@ function ServiceCard({ service }: { service: (typeof SERVICES)[0] }) {
   return (
     <motion.div variants={staggerItem}>
       <Link href={service.href} className="block relative h-full">
-        <div className="relative bg-white rounded-2xl p-8 h-full overflow-hidden group shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border border-gray-100">
-          {/* Icon */}
-          <div className="relative w-16 h-16 bg-[var(--color-primary)]/10 rounded-xl flex items-center justify-center mb-6">
-            <span className="text-[var(--color-primary)]">
-              {icons[service.icon]}
-            </span>
+        <div className="relative bg-white rounded-2xl h-full overflow-hidden group shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border border-gray-100">
+          {/* Image */}
+          <div className="relative h-48 overflow-hidden">
+            <img
+              src={service.image}
+              alt={service.title}
+              className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+            <div className="absolute top-4 left-4 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-xl flex items-center justify-center shadow-sm">
+              <span className="text-[var(--color-primary)]">
+                {icons[service.icon]}
+              </span>
+            </div>
           </div>
 
-          {/* Title */}
-          <h3
-            className="text-xl font-semibold mb-3 text-[var(--color-text)] group-hover:text-[var(--color-primary)] transition-colors duration-300"
-            style={{ fontFamily: "var(--font-heading)" }}
-          >
-            {service.title}
-          </h3>
-
-          {/* Description */}
-          <p className="text-[var(--color-text-light)] mb-6 leading-relaxed">
-            {service.description}
-          </p>
-
-          {/* CTA */}
-          <div className="flex items-center gap-2 text-[var(--color-primary)] font-medium">
-            <span>En savoir plus</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              className="w-5 h-5 group-hover:translate-x-1 transition-transform"
+          {/* Content */}
+          <div className="p-8">
+            {/* Title */}
+            <h3
+              className="text-xl font-semibold mb-3 text-[var(--color-text)] group-hover:text-[var(--color-primary)] transition-colors duration-300"
+              style={{ fontFamily: "var(--font-heading)" }}
             >
-              <path
-                fillRule="evenodd"
-                d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
-                clipRule="evenodd"
-              />
-            </svg>
+              {service.title}
+            </h3>
+
+            {/* Description */}
+            <p className="text-[var(--color-text-light)] mb-6 leading-relaxed">
+              {service.description}
+            </p>
+
+            {/* CTA */}
+            <div className="flex items-center gap-2 text-[var(--color-primary)] font-medium">
+              <span>En savoir plus</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                className="w-5 h-5 group-hover:translate-x-1 transition-transform"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </div>
           </div>
 
           {/* Bottom accent line */}

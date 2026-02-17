@@ -3,8 +3,8 @@ export const SITE_DESCRIPTION = "Service de débarras professionnel au Luxembour
 export const SITE_URL = "https://debarras-luxembourg.lu";
 
 export const CONTACT = {
-  phone: "+352 621 123 456",
-  phoneDisplay: "621 123 456",
+  phone: "+352 661 151 279",
+  phoneDisplay: "661 151 279",
   email: "contact@debarras-luxembourg.lu",
   address: "Luxembourg",
 };
@@ -28,6 +28,7 @@ export const SERVICES = [
     description: "Nous vidons maisons, appartements, caves, greniers et locaux commerciaux. Service rapide et professionnel.",
     href: "/debarras",
     icon: "truck",
+    image: "/images/services/service-debarras.jpg",
   },
   {
     id: "debarras-locaux",
@@ -35,6 +36,7 @@ export const SERVICES = [
     description: "Vidage complet de maisons, appartements, bureaux et commerces. Intervention rapide et soignée.",
     href: "/debarras",
     icon: "building",
+    image: "/images/services/service-locaux.jpg",
   },
   {
     id: "evacuation",
@@ -42,6 +44,7 @@ export const SERVICES = [
     description: "Évacuation de caves, greniers et garages. Nous prenons en charge tous types d'encombrants.",
     href: "/debarras",
     icon: "box",
+    image: "/images/services/service-evacuation.jpg",
   },
 ];
 

@@ -16,8 +16,16 @@ export function ContactCTA({
 }: ContactCTAProps) {
   return (
     <section className="relative py-24 md:py-32 overflow-hidden">
-      {/* Static gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-primary-dark)] via-[var(--color-primary)] to-[var(--color-primary-dark)]" />
+      {/* Background image with overlay */}
+      <div className="absolute inset-0">
+        <img
+          src="/images/cta/cta-bg.jpg"
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/55" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-primary-dark)]/40 to-[var(--color-secondary-dark)]/30" />
+      </div>
 
       <Container className="relative z-10">
         <motion.div
