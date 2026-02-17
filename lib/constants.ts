@@ -7,6 +7,8 @@ export const CONTACT = {
   phoneDisplay: "661 151 279",
   email: "contact@debarras-luxembourg.lu",
   address: "Luxembourg",
+  city: "Luxembourg",
+  country: "LU",
 };
 
 export const SOCIAL_LINKS = {

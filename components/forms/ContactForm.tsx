@@ -1,21 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+import { useState, useActionState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui";
-
-const contactSchema = z.object({
-  name: z.string().min(2, "Le nom doit contenir au moins 2 caractères"),
-  email: z.string().email("Adresse email invalide"),
-  phone: z.string().min(8, "Numéro de téléphone invalide"),
-  subject: z.string().min(1, "Veuillez sélectionner un sujet"),
-  message: z.string().min(10, "Le message doit contenir au moins 10 caractères"),
-});
-
-type ContactFormData = z.infer<typeof contactSchema>;
+import { submitContactForm, type ContactState } from "@/app/actions/contact";
 
 const inputVariants = {
   focus: { scale: 1.01, transition: { duration: 0.2 } },
@@ -23,67 +11,68 @@ const inputVariants = {
 };
 
 export function ContactForm() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [state, formAction, isPending] = useActionState<ContactState, FormData>(
+    submitContactForm,
+    { success: false }
+  );
   const [focusedField, setFocusedField] = useState<string | null>(null);
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm<ContactFormData>({
-    resolver: zodResolver(contactSchema),
-  });
-
-  const onSubmit = async (data: ContactFormData) => {
-    setIsSubmitting(true);
-
-    // Simulate form submission (frontend only)
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    console.log("Form data:", data);
-    setIsSubmitted(true);
-    setIsSubmitting(false);
-    reset();
-
-    // Reset success message after 5 seconds
-    setTimeout(() => setIsSubmitted(false), 5000);
+  const validateField = (name: string, value: string) => {
+    const newErrors = { ...errors };
+    switch (name) {
+      case "name":
+        if (value.length > 0 && value.length < 2) newErrors.name = "Le nom doit contenir au moins 2 caractères";
+        else delete newErrors.name;
+        break;
+      case "email":
+        if (value.length > 0 && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) newErrors.email = "Adresse email invalide";
+        else delete newErrors.email;
+        break;
+      case "phone":
+        if (value.length > 0 && value.length < 8) newErrors.phone = "Numéro de téléphone invalide";
+        else delete newErrors.phone;
+        break;
+      case "message":
+        if (value.length > 0 && value.length < 10) newErrors.message = "Le message doit contenir au moins 10 caractères";
+        else delete newErrors.message;
+        break;
+    }
+    setErrors(newErrors);
   };
 
   const inputBaseClasses = "w-full px-4 py-3.5 border-2 rounded-xl focus:ring-0 outline-none transition-all duration-300 bg-gray-50/50 hover:bg-white";
   const inputFocusClasses = "focus:border-[var(--color-primary)] focus:bg-white focus:shadow-lg focus:shadow-[var(--color-primary)]/10";
 
   return (
-    <motion.form
-      onSubmit={handleSubmit(onSubmit)}
-      className="space-y-6"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-    >
+    <form action={formAction} className="space-y-6">
       <AnimatePresence>
-        {isSubmitted && (
+        {state.success && (
           <motion.div
             initial={{ opacity: 0, y: -20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -20, scale: 0.95 }}
             className="p-5 bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-xl text-green-800 flex items-center gap-4"
           >
-            <motion.div
-              className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0"
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-            >
+            <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" className="w-6 h-6">
                 <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clipRule="evenodd" />
               </svg>
-            </motion.div>
+            </div>
             <div>
               <p className="font-semibold">Message envoyé avec succès !</p>
               <p className="text-sm text-green-600">Nous vous répondrons dans les plus brefs délais.</p>
             </div>
+          </motion.div>
+        )}
+        {state.error && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="p-4 bg-red-50 border border-red-200 rounded-xl text-red-700"
+          >
+            {state.error}
           </motion.div>
         )}
       </AnimatePresence>
@@ -101,12 +90,11 @@ export function ContactForm() {
             <input
               type="text"
               id="name"
-              {...register("name")}
+              name="name"
+              required
               onFocus={() => setFocusedField("name")}
-              onBlur={() => setFocusedField(null)}
-              className={`${inputBaseClasses} ${inputFocusClasses} pl-11 ${
-                errors.name ? "border-red-400 bg-red-50/50" : "border-gray-200"
-              }`}
+              onBlur={(e) => { setFocusedField(null); validateField("name", e.target.value); }}
+              className={`${inputBaseClasses} ${inputFocusClasses} pl-11 ${errors.name ? "border-red-400 bg-red-50/50" : "border-gray-200"}`}
               placeholder="Votre nom"
             />
             <div className={`absolute left-3 top-1/2 -translate-y-1/2 transition-colors duration-300 ${focusedField === "name" ? "text-[var(--color-primary)]" : "text-gray-400"}`}>
@@ -115,21 +103,7 @@ export function ContactForm() {
               </svg>
             </div>
           </div>
-          <AnimatePresence>
-            {errors.name && (
-              <motion.p
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                className="mt-2 text-sm text-red-500 flex items-center gap-1"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">
-                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
-                </svg>
-                {errors.name.message}
-              </motion.p>
-            )}
-          </AnimatePresence>
+          {errors.name && <p className="mt-2 text-sm text-red-500">{errors.name}</p>}
         </motion.div>
 
         {/* Email */}
@@ -144,12 +118,11 @@ export function ContactForm() {
             <input
               type="email"
               id="email"
-              {...register("email")}
+              name="email"
+              required
               onFocus={() => setFocusedField("email")}
-              onBlur={() => setFocusedField(null)}
-              className={`${inputBaseClasses} ${inputFocusClasses} pl-11 ${
-                errors.email ? "border-red-400 bg-red-50/50" : "border-gray-200"
-              }`}
+              onBlur={(e) => { setFocusedField(null); validateField("email", e.target.value); }}
+              className={`${inputBaseClasses} ${inputFocusClasses} pl-11 ${errors.email ? "border-red-400 bg-red-50/50" : "border-gray-200"}`}
               placeholder="votre@email.com"
             />
             <div className={`absolute left-3 top-1/2 -translate-y-1/2 transition-colors duration-300 ${focusedField === "email" ? "text-[var(--color-primary)]" : "text-gray-400"}`}>
@@ -159,21 +132,7 @@ export function ContactForm() {
               </svg>
             </div>
           </div>
-          <AnimatePresence>
-            {errors.email && (
-              <motion.p
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                className="mt-2 text-sm text-red-500 flex items-center gap-1"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">
-                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
-                </svg>
-                {errors.email.message}
-              </motion.p>
-            )}
-          </AnimatePresence>
+          {errors.email && <p className="mt-2 text-sm text-red-500">{errors.email}</p>}
         </motion.div>
       </div>
 
@@ -190,12 +149,11 @@ export function ContactForm() {
             <input
               type="tel"
               id="phone"
-              {...register("phone")}
+              name="phone"
+              required
               onFocus={() => setFocusedField("phone")}
-              onBlur={() => setFocusedField(null)}
-              className={`${inputBaseClasses} ${inputFocusClasses} pl-11 ${
-                errors.phone ? "border-red-400 bg-red-50/50" : "border-gray-200"
-              }`}
+              onBlur={(e) => { setFocusedField(null); validateField("phone", e.target.value); }}
+              className={`${inputBaseClasses} ${inputFocusClasses} pl-11 ${errors.phone ? "border-red-400 bg-red-50/50" : "border-gray-200"}`}
               placeholder="+352 ..."
             />
             <div className={`absolute left-3 top-1/2 -translate-y-1/2 transition-colors duration-300 ${focusedField === "phone" ? "text-[var(--color-primary)]" : "text-gray-400"}`}>
@@ -204,21 +162,7 @@ export function ContactForm() {
               </svg>
             </div>
           </div>
-          <AnimatePresence>
-            {errors.phone && (
-              <motion.p
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                className="mt-2 text-sm text-red-500 flex items-center gap-1"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">
-                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
-                </svg>
-                {errors.phone.message}
-              </motion.p>
-            )}
-          </AnimatePresence>
+          {errors.phone && <p className="mt-2 text-sm text-red-500">{errors.phone}</p>}
         </motion.div>
 
         {/* Sujet */}
@@ -232,12 +176,11 @@ export function ContactForm() {
           <div className="relative">
             <select
               id="subject"
-              {...register("subject")}
+              name="subject"
+              required
               onFocus={() => setFocusedField("subject")}
               onBlur={() => setFocusedField(null)}
-              className={`${inputBaseClasses} ${inputFocusClasses} pl-11 appearance-none cursor-pointer ${
-                errors.subject ? "border-red-400 bg-red-50/50" : "border-gray-200"
-              }`}
+              className={`${inputBaseClasses} ${inputFocusClasses} pl-11 appearance-none cursor-pointer border-gray-200`}
             >
               <option value="">Sélectionnez un sujet</option>
               <option value="debarras">Demande de débarras</option>
@@ -255,21 +198,6 @@ export function ContactForm() {
               </svg>
             </div>
           </div>
-          <AnimatePresence>
-            {errors.subject && (
-              <motion.p
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                className="mt-2 text-sm text-red-500 flex items-center gap-1"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">
-                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
-                </svg>
-                {errors.subject.message}
-              </motion.p>
-            )}
-          </AnimatePresence>
         </motion.div>
       </div>
 
@@ -284,13 +212,12 @@ export function ContactForm() {
         <div className="relative">
           <textarea
             id="message"
+            name="message"
             rows={5}
-            {...register("message")}
+            required
             onFocus={() => setFocusedField("message")}
-            onBlur={() => setFocusedField(null)}
-            className={`${inputBaseClasses} ${inputFocusClasses} pl-11 resize-none ${
-              errors.message ? "border-red-400 bg-red-50/50" : "border-gray-200"
-            }`}
+            onBlur={(e) => { setFocusedField(null); validateField("message", e.target.value); }}
+            className={`${inputBaseClasses} ${inputFocusClasses} pl-11 resize-none ${errors.message ? "border-red-400 bg-red-50/50" : "border-gray-200"}`}
             placeholder="Décrivez votre demande..."
           />
           <div className={`absolute left-3 top-4 transition-colors duration-300 ${focusedField === "message" ? "text-[var(--color-primary)]" : "text-gray-400"}`}>
@@ -299,47 +226,22 @@ export function ContactForm() {
             </svg>
           </div>
         </div>
-        <AnimatePresence>
-          {errors.message && (
-            <motion.p
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              className="mt-2 text-sm text-red-500 flex items-center gap-1"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">
-                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
-              </svg>
-              {errors.message.message}
-            </motion.p>
-          )}
-        </AnimatePresence>
+        {errors.message && <p className="mt-2 text-sm text-red-500">{errors.message}</p>}
       </motion.div>
 
       {/* Submit */}
-      <motion.div
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-        className="relative inline-block"
-      >
-        <motion.div
-          className="absolute -inset-1 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] rounded-xl blur opacity-30"
-          animate={{ opacity: isSubmitting ? 0.5 : 0.3 }}
-        />
+      <div className="relative inline-block">
+        <div className="absolute -inset-1 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] rounded-xl blur opacity-30" />
         <Button
           type="submit"
           variant="primary"
           size="lg"
-          disabled={isSubmitting}
+          disabled={isPending}
           className="relative w-full md:w-auto px-8"
         >
-          {isSubmitting ? (
+          {isPending ? (
             <span className="flex items-center gap-2">
-              <motion.span
-                className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-              />
+              <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
               Envoi en cours...
             </span>
           ) : (
@@ -351,7 +253,7 @@ export function ContactForm() {
             </span>
           )}
         </Button>
-      </motion.div>
-    </motion.form>
+      </div>
+    </form>
   );
 }

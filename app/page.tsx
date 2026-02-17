@@ -8,10 +8,12 @@ import {
   Zones,
   ContactCTA,
 } from "@/components/sections";
+import { FAQPageJsonLd } from "@/components/seo/JsonLd";
 
 export default function HomePage() {
   return (
     <>
+      <FAQPageJsonLd />
       <Hero />
       <Services />
       <WhyChooseUs />
