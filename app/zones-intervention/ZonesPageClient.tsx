@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Container, SectionTitle, Button } from "@/components/ui";
 import { ContactCTA } from "@/components/sections";
+import LuxembourgMap from "@/components/sections/LuxembourgMap";
 import { ZONES } from "@/lib/zones";
 import { CONTACT } from "@/lib/constants";
 import { fadeUp, staggerContainer, staggerItem } from "@/lib/animations";
@@ -51,6 +52,9 @@ export default function ZonesPageClient() {
           </motion.div>
         </Container>
       </section>
+
+      {/* Interactive Map */}
+      <LuxembourgMap />
 
       {/* Zones */}
       <section className="section">
