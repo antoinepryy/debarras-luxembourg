@@ -61,7 +61,10 @@ export async function POST(request: NextRequest) {
 
     const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "Origin": "https://www.debarras-luxembourg.lu",
+      },
       body: JSON.stringify(emailPayload),
     });
 
