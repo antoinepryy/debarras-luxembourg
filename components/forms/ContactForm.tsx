@@ -1,9 +1,8 @@
 "use client";
 
-import { useState, useActionState } from "react";
+import { useState, FormEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui";
-import { submitContactForm, type ContactState } from "@/app/actions/contact";
 
 const inputVariants = {
   focus: { scale: 1.01, transition: { duration: 0.2 } },
@@ -11,10 +10,9 @@ const inputVariants = {
 };
 
 export function ContactForm() {
-  const [state, formAction, isPending] = useActionState<ContactState, FormData>(
-    submitContactForm,
-    { success: false }
-  );
+  const [isPending, setIsPending] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [focusedField, setFocusedField] = useState<string | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -41,13 +39,50 @@ export function ContactForm() {
     setErrors(newErrors);
   };
 
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setIsPending(true);
+    setError(null);
+    setSuccess(false);
+
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get("name") as string,
+      email: formData.get("email") as string,
+      phone: formData.get("phone") as string,
+      subject: formData.get("subject") as string,
+      message: formData.get("message") as string,
+    };
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      const result = await res.json();
+
+      if (!res.ok) {
+        setError(result.error || "Erreur lors de l'envoi. Veuillez réessayer.");
+      } else {
+        setSuccess(true);
+        (e.target as HTMLFormElement).reset();
+      }
+    } catch {
+      setError("Erreur de connexion. Veuillez réessayer.");
+    } finally {
+      setIsPending(false);
+    }
+  }
+
   const inputBaseClasses = "w-full px-4 py-3.5 border-2 rounded-xl focus:ring-0 outline-none transition-all duration-300 bg-gray-50/50 hover:bg-white";
   const inputFocusClasses = "focus:border-[var(--color-primary)] focus:bg-white focus:shadow-lg focus:shadow-[var(--color-primary)]/10";
 
   return (
-    <form action={formAction} className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-6">
       <AnimatePresence>
-        {state.success && (
+        {success && (
           <motion.div
             initial={{ opacity: 0, y: -20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -65,14 +100,14 @@ export function ContactForm() {
             </div>
           </motion.div>
         )}
-        {state.error && (
+        {error && (
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             className="p-4 bg-red-50 border border-red-200 rounded-xl text-red-700"
           >
-            {state.error}
+            {error}
           </motion.div>
         )}
       </AnimatePresence>

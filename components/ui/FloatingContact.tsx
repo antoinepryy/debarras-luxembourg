@@ -31,7 +31,7 @@ export function FloatingContact() {
               </div>
               <div>
                 <p className="text-xs text-gray-400">Appelez-nous</p>
-                <p className="font-semibold text-sm text-[var(--color-text)]">{CONTACT.phoneDisplay}</p>
+                <p className="font-semibold text-sm text-[var(--color-text)]">{CONTACT.phone}</p>
               </div>
             </a>
 
@@ -49,7 +49,7 @@ export function FloatingContact() {
               </div>
               <div>
                 <p className="text-xs text-gray-400">WhatsApp</p>
-                <p className="font-semibold text-sm text-[var(--color-text)]">{CONTACT.phoneDisplay}</p>
+                <p className="font-semibold text-sm text-[var(--color-text)]">{CONTACT.phone}</p>
               </div>
             </a>
 

@@ -33,13 +33,13 @@ function ServiceCard({ service }: { service: (typeof SERVICES)[0] }) {
       <Link href={service.href} className="block relative h-full">
         <div className="relative bg-white rounded-2xl h-full overflow-hidden group shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border border-gray-100">
           {/* Image */}
-          <div className="relative h-48 overflow-hidden">
+          <div className="relative h-52 overflow-hidden">
             <img
               src={service.image}
               alt={service.title}
               className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
             <div className="absolute top-4 left-4 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-xl flex items-center justify-center shadow-sm">
               <span className="text-[var(--color-primary)]">
                 {icons[service.icon]}

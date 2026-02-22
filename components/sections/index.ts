@@ -6,3 +6,4 @@ export { ContactCTA } from "./ContactCTA";
 export { Testimonials } from "./Testimonials";
 export { FAQ } from "./FAQ";
 export { WhyChooseUs } from "./WhyChooseUs";
+export { GoogleReviews } from "./GoogleReviews";

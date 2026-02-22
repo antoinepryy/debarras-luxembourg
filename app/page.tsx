@@ -7,6 +7,7 @@ import {
   FAQ,
   Zones,
   ContactCTA,
+  GoogleReviews,
 } from "@/components/sections";
 import { FAQPageJsonLd } from "@/components/seo/JsonLd";
 
@@ -15,6 +16,7 @@ export default function HomePage() {
     <>
       <FAQPageJsonLd />
       <Hero />
+      <GoogleReviews />
       <Services />
       <WhyChooseUs />
       <AboutFamily />

@@ -99,7 +99,7 @@ export function Hero({
               </Button>
               <PhoneBadge
                 phone={CONTACT.phone}
-                displayPhone={CONTACT.phoneDisplay}
+                displayPhone={CONTACT.phone}
                 variant="light"
                 size="lg"
               />
