@@ -83,7 +83,7 @@ export default function AppartementsPageClient() {
       <section className="relative py-24 md:py-32 overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="/images/debarras/debarras-hero.jpg"
+            src="/images/services/workers-boxes.png"
             alt="Débarras d'appartements au Luxembourg"
             className="absolute inset-0 w-full h-full object-cover"
           />

@@ -39,7 +39,7 @@ export const SERVICES = [
     description: "Nous vidons maisons, appartements, caves, greniers et locaux commerciaux. Service rapide et professionnel.",
     href: "/debarras",
     icon: "truck",
-    image: "/images/services/service-debarras.jpg",
+    image: "/images/services/workers-boxes.png",
   },
   {
     id: "debarras-locaux",
@@ -47,7 +47,7 @@ export const SERVICES = [
     description: "Vidage complet de maisons, appartements, bureaux et commerces. Intervention rapide et soignée.",
     href: "/debarras",
     icon: "building",
-    image: "/images/services/service-locaux.jpg",
+    image: "/images/services/worker-living-room.png",
   },
   {
     id: "evacuation",
@@ -55,7 +55,7 @@ export const SERVICES = [
     description: "Évacuation de caves, greniers et garages. Nous prenons en charge tous types d'encombrants.",
     href: "/debarras",
     icon: "box",
-    image: "/images/services/service-evacuation.jpg",
+    image: "/images/services/worker-cluttered-house.png",
   },
 ];
 

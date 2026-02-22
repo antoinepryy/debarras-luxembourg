@@ -44,7 +44,7 @@ export default function ContactPageClient() {
       <section className="relative py-24 md:py-32 overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="/images/contact/contact-hero.jpg"
+            src="/images/services/workers-boxes.png"
             alt="Contactez-nous"
             className="absolute inset-0 w-full h-full object-cover"
           />

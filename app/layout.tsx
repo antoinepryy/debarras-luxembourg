@@ -3,6 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 import { Header, Footer } from "@/components/layout";
 import { FloatingContact } from "@/components/ui";
+import { PhoneClickTracker } from "@/components/tracking/PhoneClickTracker";
 import { LocalBusinessJsonLd } from "@/components/seo/JsonLd";
 import { SITE_NAME, SITE_DESCRIPTION, SITE_URL } from "@/lib/constants";
 import { GA_TRACKING_ID } from "@/lib/gtag";
@@ -75,6 +76,7 @@ export default function RootLayout({
         <main className="flex-grow">{children}</main>
         <Footer />
         <FloatingContact />
+        <PhoneClickTracker />
       </body>
     </html>
   );

@@ -3,6 +3,7 @@
 import { useState, FormEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui";
+import { trackConversion, CONVERSION_IDS } from "@/lib/gtag";
 
 const inputVariants = {
   focus: { scale: 1.01, transition: { duration: 0.2 } },
@@ -58,6 +59,7 @@ export function ContactForm() {
         setError(result.error || "Erreur lors de l'envoi. Veuillez réessayer.");
       } else {
         setSuccess(true);
+        trackConversion(CONVERSION_IDS.formulaire);
         (e.target as HTMLFormElement).reset();
       }
     } catch {

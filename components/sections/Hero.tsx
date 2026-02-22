@@ -1,9 +1,17 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState, useEffect, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button, PhoneBadge, Container } from "@/components/ui";
 import { CONTACT } from "@/lib/constants";
 import { fadeUp, fadeIn, staggerContainer, staggerItem } from "@/lib/animations";
+
+const HERO_IMAGES = [
+  "/images/hero/hero-bg-1.png",
+  "/images/hero/hero-bg-2.jpg",
+];
+
+const SLIDE_DURATION = 6000;
 
 interface HeroProps {
   title?: string;
@@ -14,6 +22,17 @@ export function Hero({
   title = "Débarras Luxembourg",
   subtitle = "Service professionnel de débarras dans tout le Luxembourg. Devis et déplacement gratuits.",
 }: HeroProps) {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const nextSlide = useCallback(() => {
+    setCurrentSlide((prev) => (prev + 1) % HERO_IMAGES.length);
+  }, []);
+
+  useEffect(() => {
+    const timer = setInterval(nextSlide, SLIDE_DURATION);
+    return () => clearInterval(timer);
+  }, [nextSlide]);
+
   const features = [
     { text: "Déplacement gratuit", icon: "truck" },
     { text: "Équipe professionnelle", icon: "search" },
@@ -22,19 +41,43 @@ export function Hero({
 
   return (
     <section className="relative min-h-[100vh] flex items-center overflow-hidden">
-      {/* Background Image */}
+      {/* Background Slider */}
       <div className="absolute inset-0">
-        <img
-          src="/images/hero/hero-bg.jpg"
-          alt="Débarras Luxembourg"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
+        {HERO_IMAGES.map((src, index) => (
+          <div
+            key={src}
+            className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
+            style={{ opacity: currentSlide === index ? 1 : 0 }}
+          >
+            <img
+              src={src}
+              alt="Débarras Luxembourg"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          </div>
+        ))}
         <div
           className="absolute inset-0"
           style={{
             background: "linear-gradient(135deg, rgba(17,24,39,0.82) 0%, rgba(17,24,39,0.72) 50%, rgba(30,58,138,0.75) 100%)",
           }}
         />
+      </div>
+
+      {/* Slide Indicators */}
+      <div className="absolute bottom-24 left-1/2 -translate-x-1/2 z-10 flex gap-2">
+        {HERO_IMAGES.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentSlide(index)}
+            className={`h-1.5 rounded-full transition-all duration-500 ${
+              currentSlide === index
+                ? "w-8 bg-white"
+                : "w-4 bg-white/40 hover:bg-white/60"
+            }`}
+            aria-label={`Slide ${index + 1}`}
+          />
+        ))}
       </div>
 
       {/* Content */}
