@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui";
+import { fadeUp, staggerContainer, staggerItem } from "@/lib/animations";
 
 const features = [
   {
@@ -49,41 +50,6 @@ const features = [
   },
 ];
 
-function FeatureCard({ feature, index }: { feature: typeof features[0]; index: number }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.15, duration: 0.5 }}
-      className="relative group"
-    >
-      <div className="relative bg-white rounded-3xl p-8 h-full overflow-hidden border border-gray-100 hover:shadow-lg hover:-translate-y-2 transition-all duration-300">
-        {/* Decorative corner */}
-        <div className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-gray-50 to-gray-100 rounded-full opacity-50" />
-
-        {/* Icon */}
-        <div
-          className={`relative w-16 h-16 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center text-white mb-6 shadow-lg`}
-        >
-          {feature.icon}
-        </div>
-
-        {/* Content */}
-        <h3
-          className="relative text-xl font-bold text-[var(--color-text)] mb-3 group-hover:text-[var(--color-primary)] transition-colors"
-          style={{ fontFamily: "var(--font-heading)" }}
-        >
-          {feature.title}
-        </h3>
-        <p className="relative text-[var(--color-text-light)] leading-relaxed">
-          {feature.description}
-        </p>
-      </div>
-    </motion.div>
-  );
-}
-
 export function WhyChooseUs() {
   return (
     <section className="section relative overflow-hidden">
@@ -91,8 +57,9 @@ export function WhyChooseUs() {
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true }}
             className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--color-primary)]/10 rounded-full mb-6"
           >
@@ -101,9 +68,11 @@ export function WhyChooseUs() {
           </motion.div>
 
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true }}
+            custom={0.1}
             className="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--color-text)] mb-6"
             style={{ fontFamily: "var(--font-heading)" }}
           >
@@ -119,10 +88,11 @@ export function WhyChooseUs() {
           />
 
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
+            custom={0.2}
             className="text-lg text-[var(--color-text-light)]"
           >
             Depuis plus de 30 ans, nous accompagnons les particuliers et professionnels du Luxembourg avec un service de débarras de qualité.
@@ -130,25 +100,53 @@ export function WhyChooseUs() {
         </div>
 
         {/* Features grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {features.map((feature, index) => (
-            <FeatureCard key={feature.title} feature={feature} index={index} />
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+        >
+          {features.map((feature) => (
+            <motion.div key={feature.title} variants={staggerItem} className="relative group">
+              <div className="relative bg-white rounded-3xl p-8 h-full overflow-hidden border border-gray-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                {/* Decorative corner */}
+                <div className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-gray-50 to-gray-100 rounded-full opacity-50" />
+
+                {/* Icon */}
+                <div
+                  className={`relative w-16 h-16 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center text-white mb-6 shadow-lg`}
+                >
+                  {feature.icon}
+                </div>
+
+                {/* Content */}
+                <h3
+                  className="relative text-xl font-bold text-[var(--color-text)] mb-3 group-hover:text-[var(--color-primary)] transition-colors"
+                  style={{ fontFamily: "var(--font-heading)" }}
+                >
+                  {feature.title}
+                </h3>
+                <p className="relative text-[var(--color-text-light)] leading-relaxed">
+                  {feature.description}
+                </p>
+              </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Bottom CTA */}
         <motion.div
           className="mt-16 text-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true }}
-          transition={{ delay: 0.5 }}
+          custom={0.3}
         >
-          <motion.a
+          <a
             href="/contact"
-            className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-dark)] text-white font-semibold rounded-2xl shadow-lg shadow-[var(--color-primary)]/30 group"
-            whileHover={{ scale: 1.05, y: -3 }}
-            whileTap={{ scale: 0.95 }}
+            className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-dark)] text-white font-semibold rounded-2xl shadow-lg shadow-[var(--color-primary)]/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
           >
             <span>Demander un devis gratuit</span>
             <svg
@@ -159,7 +157,7 @@ export function WhyChooseUs() {
             >
               <path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd" />
             </svg>
-          </motion.a>
+          </a>
         </motion.div>
       </Container>
     </section>

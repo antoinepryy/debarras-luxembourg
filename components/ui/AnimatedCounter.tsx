@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion, useInView, useSpring, useTransform } from "framer-motion";
+import { useInView, useSpring, useTransform } from "framer-motion";
 
 interface AnimatedCounterProps {
   value: number;
@@ -45,14 +45,8 @@ export function AnimatedCounter({
   }, [display]);
 
   return (
-    <motion.span
-      ref={ref}
-      className={className}
-      initial={{ opacity: 0, y: 20 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5 }}
-    >
+    <span ref={ref} className={className}>
       {prefix}{displayValue}{suffix}
-    </motion.span>
+    </span>
   );
 }

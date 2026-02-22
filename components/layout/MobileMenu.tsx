@@ -119,8 +119,6 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                   onClick={onClose}
                   className="p-2 bg-white/20 backdrop-blur-sm hover:bg-white/30 rounded-xl transition-colors"
                   aria-label="Fermer le menu"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -220,22 +218,16 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               variants={itemVariants}
               className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-white via-white to-transparent pt-8"
             >
-              <motion.a
+              <a
                 href={`tel:${CONTACT.phone.replace(/\s/g, "")}`}
-                className="flex items-center justify-center gap-3 w-full px-6 py-4 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-dark)] text-white rounded-xl font-medium shadow-lg shadow-[var(--color-primary)]/30"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                className="flex items-center justify-center gap-3 w-full px-6 py-4 bg-[#1f2937] rounded-xl font-medium shadow-lg"
+                style={{ color: "#ffffff" }}
               >
-                <motion.span
-                  animate={{ rotate: [0, 15, -15, 0] }}
-                  transition={{ duration: 0.5, repeat: Infinity, repeatDelay: 3 }}
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
-                    <path fillRule="evenodd" d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z" clipRule="evenodd" />
-                  </svg>
-                </motion.span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
+                  <path fillRule="evenodd" d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z" clipRule="evenodd" />
+                </svg>
                 {CONTACT.phoneDisplay}
-              </motion.a>
+              </a>
               <p className="text-center text-xs text-[var(--color-text-muted)] mt-3">
                 Appel gratuit - 7j/7
               </p>

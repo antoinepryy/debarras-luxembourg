@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Container, SectionTitle } from "@/components/ui";
+import { fadeUp } from "@/lib/animations";
 
 const testimonials = [
   {
@@ -43,22 +44,19 @@ function StarRating({ rating }: { rating: number }) {
   return (
     <div className="flex gap-1">
       {[...Array(5)].map((_, i) => (
-        <motion.svg
+        <svg
           key={i}
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
           fill="currentColor"
           className={`w-5 h-5 ${i < rating ? "text-[var(--color-primary)]" : "text-gray-200"}`}
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: i * 0.1 }}
         >
           <path
             fillRule="evenodd"
             d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
             clipRule="evenodd"
           />
-        </motion.svg>
+        </svg>
       ))}
     </div>
   );
@@ -78,7 +76,7 @@ export function Testimonials() {
 
   const slideVariants = {
     enter: (direction: number) => ({
-      x: direction > 0 ? 300 : -300,
+      x: direction > 0 ? 100 : -100,
       opacity: 0,
     }),
     center: {
@@ -86,7 +84,7 @@ export function Testimonials() {
       opacity: 1,
     },
     exit: (direction: number) => ({
-      x: direction < 0 ? 300 : -300,
+      x: direction < 0 ? 100 : -100,
       opacity: 0,
     }),
   };
@@ -115,22 +113,18 @@ export function Testimonials() {
                 initial="enter"
                 animate="center"
                 exit="exit"
-                transition={{ duration: 0.5, ease: "easeInOut" }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
                 className="absolute inset-0"
               >
                 <div className="bg-white rounded-3xl p-8 md:p-12 shadow-xl border border-gray-100 relative overflow-hidden">
                   {/* Decorative corner */}
                   <div className="absolute top-0 right-0 w-32 h-32">
                     <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-bl from-[var(--color-primary)]/10 to-transparent" />
-                    <motion.div
-                      className="absolute top-4 right-4 text-[var(--color-primary)]/20"
-                      animate={{ rotate: [0, 10, 0] }}
-                      transition={{ duration: 4, repeat: Infinity }}
-                    >
+                    <div className="absolute top-4 right-4 text-[var(--color-primary)]/20">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-12 h-12">
                         <path fillRule="evenodd" d="M4.848 2.771A49.144 49.144 0 0112 2.25c2.43 0 4.817.178 7.152.52 1.978.292 3.348 2.024 3.348 3.97v6.02c0 1.946-1.37 3.678-3.348 3.97a48.901 48.901 0 01-3.476.383.39.39 0 00-.297.17l-2.755 4.133a.75.75 0 01-1.248 0l-2.755-4.133a.39.39 0 00-.297-.17 48.9 48.9 0 01-3.476-.384c-1.978-.29-3.348-2.024-3.348-3.97V6.741c0-1.946 1.37-3.68 3.348-3.97z" clipRule="evenodd" />
                       </svg>
-                    </motion.div>
+                    </div>
                   </div>
 
                   {/* Rating and service */}
@@ -142,23 +136,15 @@ export function Testimonials() {
                   </div>
 
                   {/* Quote */}
-                  <motion.p
-                    className="text-lg md:text-xl text-[var(--color-text)] leading-relaxed mb-8"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.2 }}
-                  >
-                    "{testimonials[activeIndex].text}"
-                  </motion.p>
+                  <p className="text-lg md:text-xl text-[var(--color-text)] leading-relaxed mb-8">
+                    &ldquo;{testimonials[activeIndex].text}&rdquo;
+                  </p>
 
                   {/* Author */}
                   <div className="flex items-center gap-4">
-                    <motion.div
-                      className="w-14 h-14 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-dark)] rounded-full flex items-center justify-center text-white text-xl font-bold"
-                      whileHover={{ scale: 1.1 }}
-                    >
+                    <div className="w-14 h-14 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-dark)] rounded-full flex items-center justify-center text-white text-xl font-bold">
                       {testimonials[activeIndex].name.charAt(0)}
-                    </motion.div>
+                    </div>
                     <div>
                       <p className="font-semibold text-[var(--color-text)]" style={{ fontFamily: "var(--font-heading)" }}>
                         {testimonials[activeIndex].name}
@@ -179,53 +165,38 @@ export function Testimonials() {
           {/* Navigation dots */}
           <div className="flex justify-center gap-3 mt-8">
             {testimonials.map((_, index) => (
-              <motion.button
+              <button
                 key={index}
                 onClick={() => goToSlide(index)}
-                className={`relative h-3 rounded-full transition-all duration-300 ${
+                className={`h-3 rounded-full transition-all duration-300 ${
                   index === activeIndex ? "w-10 bg-[var(--color-primary)]" : "w-3 bg-gray-300 hover:bg-gray-400"
                 }`}
-                whileHover={{ scale: 1.2 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                {index === activeIndex && (
-                  <motion.div
-                    className="absolute inset-0 bg-[var(--color-primary)] rounded-full"
-                    layoutId="testimonialDot"
-                  />
-                )}
-              </motion.button>
+              />
             ))}
           </div>
 
           {/* Trust indicators */}
           <motion.div
             className="mt-12 flex flex-wrap justify-center gap-8"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true }}
           >
             {[
               { value: "5000+", label: "Clients satisfaits" },
               { value: "30+", label: "Années d'expérience" },
               { value: "100%", label: "Taux de satisfaction" },
-            ].map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                className="text-center px-6"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <motion.p
+            ].map((stat) => (
+              <div key={stat.label} className="text-center px-6">
+                <p
                   className="text-3xl md:text-4xl font-bold text-[var(--color-primary)]"
                   style={{ fontFamily: "var(--font-heading)" }}
                 >
                   {stat.value}
-                </motion.p>
+                </p>
                 <p className="text-sm text-[var(--color-text-muted)]">{stat.label}</p>
-              </motion.div>
+              </div>
             ))}
           </motion.div>
         </div>

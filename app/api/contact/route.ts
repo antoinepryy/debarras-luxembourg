@@ -1,5 +1,4 @@
-"use server";
-
+import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
 const contactSchema = z.object({
@@ -10,37 +9,28 @@ const contactSchema = z.object({
   message: z.string().min(10),
 });
 
-export type ContactState = {
-  success: boolean;
-  error?: string;
-};
-
-export async function submitContactForm(
-  _prevState: ContactState,
-  formData: FormData
-): Promise<ContactState> {
-  const raw = {
-    name: formData.get("name"),
-    email: formData.get("email"),
-    phone: formData.get("phone"),
-    subject: formData.get("subject"),
-    message: formData.get("message"),
-  };
-
-  const parsed = contactSchema.safeParse(raw);
-
-  if (!parsed.success) {
-    return { success: false, error: "Veuillez vérifier les champs du formulaire." };
-  }
-
+export async function POST(request: NextRequest) {
   try {
+    const body = await request.json();
+    const parsed = contactSchema.safeParse(body);
+
+    if (!parsed.success) {
+      return NextResponse.json(
+        { error: "Veuillez vérifier les champs du formulaire." },
+        { status: 400 }
+      );
+    }
+
     const serviceId = process.env.EMAILJS_SERVICE_ID;
     const templateId = process.env.EMAILJS_TEMPLATE_ID;
     const publicKey = process.env.EMAILJS_PUBLIC_KEY;
 
     if (!serviceId || !templateId || !publicKey) {
       console.error("EmailJS credentials missing");
-      return { success: false, error: "Configuration email manquante." };
+      return NextResponse.json(
+        { error: "Configuration email manquante." },
+        { status: 500 }
+      );
     }
 
     const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
@@ -63,12 +53,18 @@ export async function submitContactForm(
     if (!res.ok) {
       const errorText = await res.text();
       console.error("EmailJS error:", errorText);
-      return { success: false, error: "Erreur lors de l'envoi. Veuillez réessayer." };
+      return NextResponse.json(
+        { error: "Erreur lors de l'envoi. Veuillez réessayer." },
+        { status: 500 }
+      );
     }
 
-    return { success: true };
+    return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("Contact form error:", error);
-    return { success: false, error: "Erreur lors de l'envoi. Veuillez réessayer." };
+    console.error("Contact API error:", error);
+    return NextResponse.json(
+      { error: "Erreur lors de l'envoi. Veuillez réessayer." },
+      { status: 500 }
+    );
   }
 }

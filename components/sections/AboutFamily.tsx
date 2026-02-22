@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { Container, Button } from "@/components/ui";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
-import { slideInLeft, slideInRight } from "@/lib/animations";
+import { fadeIn, fadeUp } from "@/lib/animations";
 
 interface AboutFamilyProps {
   title?: string;
@@ -31,7 +31,7 @@ export function AboutFamily({
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Visual Section */}
           <motion.div
-            variants={slideInLeft}
+            variants={fadeIn}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
@@ -49,10 +49,11 @@ export function AboutFamily({
             {/* Experience badge */}
             <motion.div
               className="absolute -bottom-4 left-8 bg-white rounded-xl shadow-xl p-4 flex items-center gap-4"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
               viewport={{ once: true }}
-              transition={{ delay: 0.5, duration: 0.5 }}
+              custom={0.3}
             >
               <div className="w-14 h-14 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-dark)] rounded-lg flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" className="w-7 h-7">
@@ -68,22 +69,17 @@ export function AboutFamily({
 
           {/* Content Section */}
           <motion.div
-            variants={slideInRight}
+            variants={fadeIn}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
+            custom={0.2}
           >
             {/* Badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--color-primary)]/10 rounded-full mb-6"
-            >
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--color-primary)]/10 rounded-full mb-6">
               <span className="w-2 h-2 bg-[var(--color-primary)] rounded-full" />
               <span className="text-sm font-medium text-[var(--color-primary-dark)]">À propos de nous</span>
-            </motion.div>
+            </div>
 
             <h2
               className="text-3xl md:text-4xl lg:text-5xl font-semibold mb-6 leading-tight"
@@ -92,13 +88,8 @@ export function AboutFamily({
               {title}
             </h2>
 
-            <motion.div
+            <div
               className="w-20 h-1 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-accent)] rounded-full mb-6"
-              initial={{ scaleX: 0 }}
-              whileInView={{ scaleX: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3, duration: 0.5 }}
-              style={{ originX: 0 }}
             />
 
             <p className="text-[var(--color-text-light)] text-lg leading-relaxed mb-8">
@@ -107,14 +98,10 @@ export function AboutFamily({
 
             {/* Stats */}
             <div className="grid grid-cols-3 gap-4 mb-10">
-              {stats.map((stat, index) => (
-                <motion.div
+              {stats.map((stat) => (
+                <div
                   key={stat.label}
-                  className="text-center p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.4 + index * 0.1 }}
+                  className="text-center p-4 bg-white rounded-xl shadow-sm"
                 >
                   <AnimatedCounter
                     value={stat.value}
@@ -125,18 +112,13 @@ export function AboutFamily({
                   <span className="text-xs md:text-sm text-[var(--color-text-muted)] mt-1 block">
                     {stat.label}
                   </span>
-                </motion.div>
+                </div>
               ))}
             </div>
 
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Button href="/contact" variant="primary" size="lg">
-                Nous contacter
-              </Button>
-            </motion.div>
+            <Button href="/contact" variant="primary" size="lg">
+              Nous contacter
+            </Button>
           </motion.div>
         </div>
       </Container>

@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Container, SectionTitle } from "@/components/ui";
+import { Container } from "@/components/ui";
+import { fadeUp } from "@/lib/animations";
 
 const faqs = [
   {
@@ -39,34 +40,32 @@ function FAQItem({ faq, index, isOpen, onToggle }: {
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      variants={fadeUp}
+      initial="hidden"
+      whileInView="visible"
       viewport={{ once: true }}
-      transition={{ delay: index * 0.1 }}
+      custom={index * 0.05}
       className="group"
     >
-      <motion.button
+      <button
         onClick={onToggle}
         className={`w-full text-left p-6 rounded-2xl transition-all duration-300 ${
           isOpen
             ? "bg-gradient-to-r from-[var(--color-primary)]/10 to-[var(--color-primary)]/5 border-2 border-[var(--color-primary)]/20"
             : "bg-white hover:bg-gray-50 border-2 border-gray-100 hover:border-[var(--color-primary)]/20"
         }`}
-        whileHover={{ scale: 1.01 }}
-        whileTap={{ scale: 0.99 }}
       >
         <div className="flex items-start justify-between gap-4">
           <div className="flex items-start gap-4">
-            <motion.div
+            <div
               className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 font-bold text-sm ${
                 isOpen
                   ? "bg-[var(--color-primary)] text-white"
                   : "bg-[var(--color-primary)]/10 text-[var(--color-primary-dark)]"
               }`}
-              animate={{ rotate: isOpen ? 0 : 0 }}
             >
               {String(index + 1).padStart(2, "0")}
-            </motion.div>
+            </div>
             <h3
               className={`text-lg font-semibold pt-1.5 ${
                 isOpen ? "text-[var(--color-primary)]" : "text-[var(--color-text)]"
@@ -106,7 +105,7 @@ function FAQItem({ faq, index, isOpen, onToggle }: {
             </motion.div>
           )}
         </AnimatePresence>
-      </motion.button>
+      </button>
     </motion.div>
   );
 }
@@ -121,21 +120,17 @@ export function FAQ() {
           {/* Left column - Title and info */}
           <div className="lg:col-span-4 lg:sticky lg:top-32">
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
               viewport={{ once: true }}
             >
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--color-primary)]/10 rounded-full mb-6"
-              >
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--color-primary)]/10 rounded-full mb-6">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 text-[var(--color-primary)]">
                   <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM8.94 6.94a.75.75 0 11-1.061-1.061 3 3 0 112.871 5.026v.345a.75.75 0 01-1.5 0v-.5c0-.72.57-1.172 1.081-1.287A1.5 1.5 0 108.94 6.94zM10 15a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
                 </svg>
                 <span className="text-sm font-medium text-[var(--color-primary-dark)]">FAQ</span>
-              </motion.div>
+              </div>
 
               <h2
                 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--color-text)] mb-6"
@@ -144,22 +139,13 @@ export function FAQ() {
                 Questions fréquentes
               </h2>
 
-              <motion.div
-                className="w-20 h-1 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] rounded-full mb-6"
-                initial={{ scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
-                viewport={{ once: true }}
-                style={{ originX: 0 }}
-              />
+              <div className="w-20 h-1 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] rounded-full mb-6" />
 
               <p className="text-[var(--color-text-light)] leading-relaxed mb-8">
                 Retrouvez les réponses aux questions les plus courantes sur nos services de débarras.
               </p>
 
-              <motion.div
-                className="p-6 bg-white rounded-2xl shadow-sm border border-gray-100"
-                whileHover={{ y: -5, boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1)" }}
-              >
+              <div className="p-6 bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
                 <div className="flex items-center gap-4 mb-4">
                   <div className="w-12 h-12 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-dark)] rounded-xl flex items-center justify-center">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" className="w-6 h-6">
@@ -180,7 +166,7 @@ export function FAQ() {
                     <path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd" />
                   </svg>
                 </a>
-              </motion.div>
+              </div>
             </motion.div>
           </div>
 

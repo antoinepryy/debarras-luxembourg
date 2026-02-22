@@ -47,12 +47,8 @@ export function SectionTitle({
           {subtitle}
         </motion.p>
       )}
-      <motion.div
-        initial={{ scaleX: 0 }}
-        whileInView={{ scaleX: 1 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-        className={`mt-6 h-1 w-24 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-dark)] rounded-full origin-left ${
+      <div
+        className={`mt-6 h-1 w-24 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-dark)] rounded-full ${
           centered ? "mx-auto" : ""
         }`}
       />

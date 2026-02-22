@@ -18,7 +18,16 @@ export const SOCIAL_LINKS = {
 
 export const NAV_ITEMS = [
   { label: "Accueil", href: "/" },
-  { label: "Débarras", href: "/debarras" },
+  {
+    label: "Débarras",
+    href: "/debarras",
+    children: [
+      { label: "Débarras de maisons", href: "/debarras/maisons" },
+      { label: "Débarras d'appartements", href: "/debarras/appartements" },
+      { label: "Débarras de caves", href: "/debarras/caves" },
+      { label: "Débarras de greniers", href: "/debarras/greniers" },
+    ],
+  },
   { label: "Zones d'intervention", href: "/zones-intervention" },
   { label: "Contact", href: "/contact" },
 ];

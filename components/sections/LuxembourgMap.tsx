@@ -4,6 +4,7 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
 import { ZONES } from "@/lib/zones";
 import { Container } from "@/components/ui";
+import { fadeIn } from "@/lib/animations";
 
 interface CityPos {
   x: number;
@@ -94,9 +95,9 @@ export default function LuxembourgMap() {
                 strokeWidth="6"
                 strokeLinejoin="round"
                 opacity="0.15"
-                initial={{ pathLength: 0 }}
-                animate={isInView ? { pathLength: 1 } : {}}
-                transition={{ duration: 2.5, ease: "easeInOut" }}
+                initial={{ opacity: 0 }}
+                animate={isInView ? { opacity: 0.15 } : {}}
+                transition={{ duration: 0.6 }}
                 style={{ filter: "blur(6px)" }}
               />
 
@@ -107,31 +108,10 @@ export default function LuxembourgMap() {
                 stroke="#2563eb"
                 strokeWidth="2"
                 strokeLinejoin="round"
-                initial={{ pathLength: 0, fillOpacity: 0 }}
-                animate={isInView ? { pathLength: 1, fillOpacity: 1 } : {}}
-                transition={{ duration: 2.5, ease: "easeInOut" }}
+                initial={{ opacity: 0 }}
+                animate={isInView ? { opacity: 1 } : {}}
+                transition={{ duration: 0.6 }}
               />
-
-              {/* Coverage pulse rings from capital */}
-              {isInView &&
-                [0, 1, 2].map((i) => (
-                  <motion.circle
-                    key={`ring-${i}`}
-                    cx={capital.x}
-                    cy={capital.y}
-                    fill="none"
-                    stroke="#2563eb"
-                    strokeWidth="1"
-                    initial={{ r: 15, opacity: 0.3 }}
-                    animate={{ r: 160, opacity: 0 }}
-                    transition={{
-                      duration: 3.5,
-                      repeat: Infinity,
-                      delay: 2 + i * 1.2,
-                      ease: "easeOut",
-                    }}
-                  />
-                ))}
 
               {/* Connection lines from capital */}
               {Object.entries(CITIES).map(([id, pos], i) => {
@@ -146,19 +126,15 @@ export default function LuxembourgMap() {
                     stroke="#2563eb"
                     strokeWidth={hovered === id ? 1.5 : 0.8}
                     strokeDasharray="5 5"
-                    initial={{ opacity: 0, pathLength: 0 }}
+                    initial={{ opacity: 0 }}
                     animate={
                       isInView
                         ? {
                             opacity: hovered === id ? 0.5 : 0.12,
-                            pathLength: 1,
                           }
                         : {}
                     }
-                    transition={{
-                      pathLength: { duration: 0.8, delay: 2.2 + i * 0.08 },
-                      opacity: { duration: 0.3 },
-                    }}
+                    transition={{ duration: 0.3, delay: 0.3 + i * 0.03 }}
                   />
                 );
               })}
@@ -177,26 +153,6 @@ export default function LuxembourgMap() {
                     onClick={() => setHovered(hovered === id ? null : id)}
                     style={{ cursor: "pointer" }}
                   >
-                    {/* Outer pulse for hovered or capital */}
-                    {(isHov || isCap) && (
-                      <motion.circle
-                        cx={pos.x}
-                        cy={pos.y}
-                        fill="none"
-                        stroke={isCap ? "#f59e0b" : "#2563eb"}
-                        strokeWidth="1.5"
-                        animate={{
-                          r: [r + 4, r + 14],
-                          opacity: [0.5, 0],
-                        }}
-                        transition={{
-                          duration: 1.5,
-                          repeat: Infinity,
-                          ease: "easeOut",
-                        }}
-                      />
-                    )}
-
                     {/* Larger invisible hit area for easier hover/tap */}
                     <circle
                       cx={pos.x}
@@ -212,14 +168,9 @@ export default function LuxembourgMap() {
                       r={isHov ? r + 2 : r}
                       fill={isCap ? "#f59e0b" : "#3b82f6"}
                       filter={isCap ? "url(#bigGlow)" : "url(#dotGlow)"}
-                      initial={{ scale: 0 }}
-                      animate={isInView ? { scale: 1 } : {}}
-                      transition={{
-                        delay: 2 + i * 0.1,
-                        type: "spring",
-                        stiffness: 260,
-                        damping: 15,
-                      }}
+                      initial={{ opacity: 0 }}
+                      animate={isInView ? { opacity: 1 } : {}}
+                      transition={{ delay: 0.4 + i * 0.05, duration: 0.3 }}
                     />
 
                     {/* Center highlight */}
@@ -229,9 +180,9 @@ export default function LuxembourgMap() {
                       r={isCap ? 2.5 : 1.5}
                       fill="white"
                       opacity="0.85"
-                      initial={{ scale: 0 }}
-                      animate={isInView ? { scale: 1 } : {}}
-                      transition={{ delay: 2.1 + i * 0.1 }}
+                      initial={{ opacity: 0 }}
+                      animate={isInView ? { opacity: 0.85 } : {}}
+                      transition={{ delay: 0.5 + i * 0.05 }}
                       style={{ pointerEvents: "none" }}
                     />
 
@@ -246,7 +197,7 @@ export default function LuxembourgMap() {
                         fontWeight="600"
                         initial={{ opacity: 0 }}
                         animate={isInView ? { opacity: 0.9 } : {}}
-                        transition={{ delay: 2.5 }}
+                        transition={{ delay: 0.6 }}
                         style={{
                           pointerEvents: "none",
                           fontFamily: "var(--font-heading)",
@@ -306,12 +257,14 @@ export default function LuxembourgMap() {
           {/* Info panel */}
           <div className="lg:col-span-2 text-white">
             <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.3 }}
+              variants={fadeIn}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={0.2}
             >
               <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/10 rounded-full mb-5 text-sm backdrop-blur-sm">
-                <span className="w-2 h-2 bg-[#f59e0b] rounded-full animate-pulse" />
+                <span className="w-2 h-2 bg-[#f59e0b] rounded-full" />
                 Couverture nationale
               </div>
 
@@ -340,9 +293,10 @@ export default function LuxembourgMap() {
                   <motion.div
                     key={stat.label}
                     className="text-center p-3 rounded-xl bg-white/5 border border-white/[0.08]"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ delay: 0.5 + i * 0.1 }}
+                    initial={{ opacity: 0, y: 15 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 + i * 0.1, duration: 0.4 }}
                   >
                     <div className="text-xl md:text-2xl font-bold text-[#3b82f6]">
                       {stat.value}

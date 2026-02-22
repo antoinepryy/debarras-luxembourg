@@ -1,52 +1,19 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import { Button, PhoneBadge, Container } from "@/components/ui";
 import { CONTACT } from "@/lib/constants";
-import { fadeUp, staggerContainer, staggerItem } from "@/lib/animations";
+import { fadeUp, fadeIn, staggerContainer, staggerItem } from "@/lib/animations";
 
 interface HeroProps {
   title?: string;
   subtitle?: string;
 }
 
-function AnimatedText({ text, className }: { text: string; className?: string }) {
-  const words = text.split(" ");
-
-  return (
-    <motion.span
-      className={className}
-      variants={staggerContainer}
-      initial="hidden"
-      animate="visible"
-    >
-      {words.map((word, i) => (
-        <motion.span
-          key={i}
-          className="inline-block mr-[0.25em]"
-          variants={staggerItem}
-        >
-          {word}
-        </motion.span>
-      ))}
-    </motion.span>
-  );
-}
-
 export function Hero({
   title = "Débarras Luxembourg",
   subtitle = "Service professionnel de débarras dans tout le Luxembourg. Devis et déplacement gratuits.",
 }: HeroProps) {
-  const containerRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
-
-  const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-
   const features = [
     { text: "Déplacement gratuit", icon: "truck" },
     { text: "Équipe professionnelle", icon: "search" },
@@ -54,10 +21,7 @@ export function Hero({
   ];
 
   return (
-    <section
-      ref={containerRef}
-      className="relative min-h-[100vh] flex items-center overflow-hidden"
-    >
+    <section className="relative min-h-[100vh] flex items-center overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
@@ -74,14 +38,14 @@ export function Hero({
       </div>
 
       {/* Content */}
-      <motion.div style={{ y, opacity }} className="relative z-10 w-full">
+      <div className="relative z-10 w-full">
         <Container className="py-20">
           <div className="max-w-3xl">
             {/* Badge */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              variants={fadeIn}
+              initial="hidden"
+              animate="visible"
               className="mb-6"
             >
               <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full text-sm text-white border border-white/10">
@@ -92,10 +56,14 @@ export function Hero({
 
             {/* Title */}
             <motion.h1
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              custom={0.1}
               className="text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight"
               style={{ fontFamily: "var(--font-heading)" }}
             >
-              <AnimatedText text={title} />
+              {title}
             </motion.h1>
 
             {/* Decorative line */}
@@ -103,7 +71,7 @@ export function Hero({
               className="w-24 h-1 bg-gradient-to-r from-[var(--color-accent)] to-transparent rounded-full mb-6"
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
               style={{ originX: 0 }}
             />
 
@@ -112,7 +80,7 @@ export function Hero({
               variants={fadeUp}
               initial="hidden"
               animate="visible"
-              custom={0.4}
+              custom={0.3}
               className="text-lg md:text-xl text-gray-200 mb-10 leading-relaxed max-w-2xl"
             >
               {subtitle}
@@ -123,28 +91,18 @@ export function Hero({
               variants={fadeUp}
               initial="hidden"
               animate="visible"
-              custom={0.6}
+              custom={0.5}
               className="flex flex-col sm:flex-row gap-4 mb-12"
             >
-              <motion.div
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Button href="/contact" variant="primary" size="lg" className="shadow-2xl">
-                  Demander un devis gratuit
-                </Button>
-              </motion.div>
-              <motion.div
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <PhoneBadge
-                  phone={CONTACT.phone}
-                  displayPhone={CONTACT.phoneDisplay}
-                  variant="light"
-                  size="lg"
-                />
-              </motion.div>
+              <Button href="/contact" variant="primary" size="lg" className="shadow-2xl">
+                Demander un devis gratuit
+              </Button>
+              <PhoneBadge
+                phone={CONTACT.phone}
+                displayPhone={CONTACT.phoneDisplay}
+                variant="light"
+                size="lg"
+              />
             </motion.div>
 
             {/* Features */}
@@ -158,11 +116,7 @@ export function Hero({
                 <motion.div
                   key={feature.text}
                   variants={staggerItem}
-                  whileHover={{
-                    scale: 1.05,
-                    backgroundColor: "rgba(255,255,255,0.15)",
-                  }}
-                  className="group flex items-center gap-3 px-5 py-3 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 cursor-default transition-all duration-300"
+                  className="group flex items-center gap-3 px-5 py-3 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 cursor-default transition-all duration-300 hover:bg-white/10"
                 >
                   <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center">
                     <svg
@@ -184,29 +138,22 @@ export function Hero({
             </motion.div>
           </div>
         </Container>
-      </motion.div>
+      </div>
 
       {/* Scroll indicator */}
       <motion.div
         className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.5, duration: 0.6 }}
+        variants={fadeIn}
+        initial="hidden"
+        animate="visible"
+        custom={1}
       >
-        <motion.div
-          className="flex flex-col items-center gap-2"
-          animate={{ y: [0, 5, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
+        <div className="flex flex-col items-center gap-2">
           <span className="text-white/50 text-xs uppercase tracking-widest">Scroll</span>
           <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center p-2">
-            <motion.div
-              className="w-1.5 h-1.5 bg-white rounded-full"
-              animate={{ y: [0, 12, 0], opacity: [1, 0.5, 1] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-            />
+            <div className="w-1.5 h-1.5 bg-white rounded-full" />
           </div>
-        </motion.div>
+        </div>
       </motion.div>
     </section>
   );

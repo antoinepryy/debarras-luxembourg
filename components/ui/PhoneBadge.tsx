@@ -21,9 +21,15 @@ export function PhoneBadge({
   const display = displayPhone || phone;
 
   const variantStyles = {
-    primary: "bg-[var(--color-primary)] text-white hover:bg-[var(--color-primary-dark)]",
-    secondary: "bg-[var(--color-secondary)] text-white hover:bg-[var(--color-secondary-dark)]",
-    light: "bg-white text-[var(--color-primary)] hover:bg-gray-100 border border-[var(--color-primary)]",
+    primary: "bg-[#1f2937] hover:bg-[#111827]",
+    secondary: "bg-[#374151] hover:bg-[#1f2937]",
+    light: "bg-white hover:bg-gray-100 border border-[var(--color-primary)]",
+  };
+
+  const variantColors: Record<string, string> = {
+    primary: "#ffffff",
+    secondary: "#ffffff",
+    light: "var(--color-primary)",
   };
 
   const sizeStyles = {
@@ -36,6 +42,7 @@ export function PhoneBadge({
     <Link
       href={`tel:${cleanPhone}`}
       className={`inline-flex items-center gap-3 rounded-xl font-semibold transition-all duration-300 ${variantStyles[variant]} ${sizeStyles[size]} ${className}`}
+      style={{ color: variantColors[variant] }}
     >
       {showIcon && (
         <svg

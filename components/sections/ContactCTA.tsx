@@ -36,85 +36,54 @@ export function ContactCTA({
           className="text-center max-w-3xl mx-auto"
         >
           {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full mb-8 border border-white/10"
-          >
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full mb-8 border border-white/10">
             <span className="w-2 h-2 bg-white rounded-full" />
             <span className="text-sm text-white/90">Réponse sous 24h</span>
-          </motion.div>
+          </div>
 
           {/* Title */}
-          <motion.h2
+          <h2
             className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6"
             style={{ fontFamily: "var(--font-heading)" }}
-            variants={fadeUp}
-            custom={0.1}
           >
             {title}
-          </motion.h2>
+          </h2>
 
           {/* Underline */}
-          <motion.div
-            className="w-24 h-1 bg-gradient-to-r from-white to-white/50 mx-auto mb-6 rounded-full"
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-          />
+          <div className="w-24 h-1 bg-gradient-to-r from-white to-white/50 mx-auto mb-6 rounded-full" />
 
           {/* Subtitle */}
-          <motion.p
-            className="text-lg md:text-xl text-white/80 mb-10 leading-relaxed"
-            variants={fadeUp}
-            custom={0.2}
-          >
+          <p className="text-lg md:text-xl text-white/80 mb-10 leading-relaxed">
             {subtitle}
-          </motion.p>
+          </p>
 
           {/* CTA Buttons */}
-          <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-            variants={fadeUp}
-            custom={0.3}
-          >
-            <motion.div
-              whileHover={{ scale: 1.05, y: -3 }}
-              whileTap={{ scale: 0.95 }}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button
+              href="/contact"
+              variant="primary"
+              size="lg"
+              className="shadow-2xl"
             >
-              <Button
-                href="/contact"
-                variant="primary"
-                size="lg"
-                className="shadow-2xl"
-              >
-                Demander un devis
-              </Button>
-            </motion.div>
+              Demander un devis
+            </Button>
 
-            <motion.div
-              whileHover={{ scale: 1.05, y: -3 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <PhoneBadge
-                phone={CONTACT.phone}
-                displayPhone={CONTACT.phoneDisplay}
-                variant="light"
-                size="lg"
-              />
-            </motion.div>
-          </motion.div>
+            <PhoneBadge
+              phone={CONTACT.phone}
+              displayPhone={CONTACT.phoneDisplay}
+              variant="light"
+              size="lg"
+            />
+          </div>
 
           {/* Trust indicators */}
           <motion.div
             className="mt-12 flex flex-wrap justify-center gap-8"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true }}
-            transition={{ delay: 0.6 }}
+            custom={0.3}
           >
             {[
               { icon: "shield", text: "Service garanti" },
