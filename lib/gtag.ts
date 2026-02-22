@@ -1,8 +1,8 @@
-export const GA_TRACKING_ID = "AW-309816355";
+export const GA_TRACKING_ID = "AW-17969647792";
 
 export const CONVERSION_IDS = {
-  formulaire: "AW-309816355/vId8CIuOi_0bEKPY3ZMB",
-  appel: "AW-309816355/uolwCI6Oi_0bEKPY3ZMB",
+  formulaire: "AW-17969647792/rLTkCMmMjf0bELChzPhC",
+  appel: "AW-17969647792/MIqrCMyMjf0bELChzPhC",
 } as const;
 
 declare global {
