@@ -2,7 +2,7 @@
 
 import { useState, FormEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import emailjs from "@emailjs/browser";
+import emailjs from "emailjs-com";
 import { Button } from "@/components/ui";
 import { trackConversion, CONVERSION_IDS } from "@/lib/gtag";
 
@@ -51,13 +51,7 @@ export function ContactForm() {
       await emailjs.send(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
-        {
-          from_name: data.name,
-          from_email: data.email,
-          phone: data.phone,
-          subject: "Demande de contact",
-          message: data.message,
-        },
+        data,
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!,
       );
 
