@@ -27,14 +27,6 @@ export function ContactForm() {
         if (value.length > 0 && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) newErrors.email = "Adresse email invalide";
         else delete newErrors.email;
         break;
-      case "phone":
-        if (value.length > 0 && value.length < 8) newErrors.phone = "Numéro de téléphone invalide";
-        else delete newErrors.phone;
-        break;
-      case "message":
-        if (value.length > 0 && value.length < 10) newErrors.message = "Le message doit contenir au moins 10 caractères";
-        else delete newErrors.message;
-        break;
     }
     setErrors(newErrors);
   };
@@ -49,8 +41,7 @@ export function ContactForm() {
     const data = {
       name: formData.get("name") as string,
       email: formData.get("email") as string,
-      phone: formData.get("phone") as string,
-      subject: formData.get("subject") as string,
+      phone: (formData.get("phone") as string) || "",
       message: formData.get("message") as string,
     };
 
@@ -171,70 +162,31 @@ export function ContactForm() {
         </motion.div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Téléphone */}
-        <motion.div
-          variants={inputVariants}
-          animate={focusedField === "phone" ? "focus" : "blur"}
-        >
-          <label htmlFor="phone" className="block text-sm font-semibold text-[var(--color-text)] mb-2">
-            Téléphone <span className="text-[var(--color-primary)]">*</span>
-          </label>
-          <div className="relative">
-            <input
-              type="tel"
-              id="phone"
-              name="phone"
-              required
-              onFocus={() => setFocusedField("phone")}
-              onBlur={(e) => { setFocusedField(null); validateField("phone", e.target.value); }}
-              className={`${inputBaseClasses} ${inputFocusClasses} pl-11 ${errors.phone ? "border-red-400 bg-red-50/50" : "border-gray-200"}`}
-              placeholder="+352 ..."
-            />
-            <div className={`absolute left-3 top-1/2 -translate-y-1/2 transition-colors duration-300 ${focusedField === "phone" ? "text-[var(--color-primary)]" : "text-gray-400"}`}>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
-                <path fillRule="evenodd" d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z" clipRule="evenodd" />
-              </svg>
-            </div>
+      {/* Téléphone - pleine largeur */}
+      <motion.div
+        variants={inputVariants}
+        animate={focusedField === "phone" ? "focus" : "blur"}
+      >
+        <label htmlFor="phone" className="block text-sm font-semibold text-[var(--color-text)] mb-2">
+          Téléphone
+        </label>
+        <div className="relative">
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            onFocus={() => setFocusedField("phone")}
+            onBlur={() => setFocusedField(null)}
+            className={`${inputBaseClasses} ${inputFocusClasses} pl-11 border-gray-200`}
+            placeholder="+352 ..."
+          />
+          <div className={`absolute left-3 top-1/2 -translate-y-1/2 transition-colors duration-300 ${focusedField === "phone" ? "text-[var(--color-primary)]" : "text-gray-400"}`}>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
+              <path fillRule="evenodd" d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z" clipRule="evenodd" />
+            </svg>
           </div>
-          {errors.phone && <p className="mt-2 text-sm text-red-500">{errors.phone}</p>}
-        </motion.div>
-
-        {/* Sujet */}
-        <motion.div
-          variants={inputVariants}
-          animate={focusedField === "subject" ? "focus" : "blur"}
-        >
-          <label htmlFor="subject" className="block text-sm font-semibold text-[var(--color-text)] mb-2">
-            Sujet <span className="text-[var(--color-primary)]">*</span>
-          </label>
-          <div className="relative">
-            <select
-              id="subject"
-              name="subject"
-              required
-              onFocus={() => setFocusedField("subject")}
-              onBlur={() => setFocusedField(null)}
-              className={`${inputBaseClasses} ${inputFocusClasses} pl-11 appearance-none cursor-pointer border-gray-200`}
-            >
-              <option value="">Sélectionnez un sujet</option>
-              <option value="debarras">Demande de débarras</option>
-              <option value="devis">Demande de devis</option>
-              <option value="autre">Autre demande</option>
-            </select>
-            <div className={`absolute left-3 top-1/2 -translate-y-1/2 transition-colors duration-300 ${focusedField === "subject" ? "text-[var(--color-primary)]" : "text-gray-400"}`}>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
-                <path fillRule="evenodd" d="M4.5 2A1.5 1.5 0 003 3.5v13A1.5 1.5 0 004.5 18h11a1.5 1.5 0 001.5-1.5V7.621a1.5 1.5 0 00-.44-1.06l-4.12-4.122A1.5 1.5 0 0011.378 2H4.5zm2.25 8.5a.75.75 0 000 1.5h6.5a.75.75 0 000-1.5h-6.5zm0 3a.75.75 0 000 1.5h6.5a.75.75 0 000-1.5h-6.5z" clipRule="evenodd" />
-              </svg>
-            </div>
-            <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
-                <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
-              </svg>
-            </div>
-          </div>
-        </motion.div>
-      </div>
+        </div>
+      </motion.div>
 
       {/* Message */}
       <motion.div
@@ -251,8 +203,8 @@ export function ContactForm() {
             rows={5}
             required
             onFocus={() => setFocusedField("message")}
-            onBlur={(e) => { setFocusedField(null); validateField("message", e.target.value); }}
-            className={`${inputBaseClasses} ${inputFocusClasses} pl-11 resize-none ${errors.message ? "border-red-400 bg-red-50/50" : "border-gray-200"}`}
+            onBlur={() => setFocusedField(null)}
+            className={`${inputBaseClasses} ${inputFocusClasses} pl-11 resize-none border-gray-200`}
             placeholder="Décrivez votre demande..."
           />
           <div className={`absolute left-3 top-4 transition-colors duration-300 ${focusedField === "message" ? "text-[var(--color-primary)]" : "text-gray-400"}`}>
@@ -261,7 +213,6 @@ export function ContactForm() {
             </svg>
           </div>
         </div>
-        {errors.message && <p className="mt-2 text-sm text-red-500">{errors.message}</p>}
       </motion.div>
 
       {/* Submit */}

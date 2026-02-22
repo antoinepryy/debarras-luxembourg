@@ -4,9 +4,8 @@ import { z } from "zod";
 const contactSchema = z.object({
   name: z.string().min(2),
   email: z.string().email(),
-  phone: z.string().min(8),
-  subject: z.string().min(1),
-  message: z.string().min(10),
+  phone: z.string().optional(),
+  message: z.string().min(1),
 });
 
 export async function POST(request: NextRequest) {
@@ -43,8 +42,8 @@ export async function POST(request: NextRequest) {
         template_params: {
           from_name: parsed.data.name,
           from_email: parsed.data.email,
-          phone: parsed.data.phone,
-          subject: parsed.data.subject,
+          phone: parsed.data.phone || "",
+          subject: "Demande de contact",
           message: parsed.data.message,
         },
       }),
