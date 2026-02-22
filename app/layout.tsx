@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import { Header, Footer } from "@/components/layout";
 import { FloatingContact } from "@/components/ui";
 import { LocalBusinessJsonLd } from "@/components/seo/JsonLd";
 import { SITE_NAME, SITE_DESCRIPTION, SITE_URL } from "@/lib/constants";
+import { GA_TRACKING_ID } from "@/lib/gtag";
 
 export const metadata: Metadata = {
   title: {
@@ -41,6 +43,9 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  verification: {
+    google: "CHVte6zQixgedJxVeQJvjCD95s2xCf6USqYlhUaZPQ0",
+  },
 };
 
 export default function RootLayout({
@@ -50,6 +55,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
+      <head>
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-ads-gtag" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_TRACKING_ID}');
+          `}
+        </Script>
+      </head>
       <body className="min-h-screen flex flex-col">
         <LocalBusinessJsonLd />
         <Header />
