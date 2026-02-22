@@ -3,8 +3,8 @@ export const SITE_DESCRIPTION = "Service de débarras professionnel au Luxembour
 export const SITE_URL = "https://debarras-luxembourg.lu";
 
 export const CONTACT = {
-  phone: "+352 661 151 279",
-  phoneDisplay: "661 151 279",
+  phone: "+352 661 112 001",
+  phoneDisplay: "661 112 001",
   email: "contact@debarras-luxembourg.lu",
   address: "Luxembourg",
   city: "Luxembourg",
