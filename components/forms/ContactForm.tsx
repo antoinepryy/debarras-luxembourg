@@ -2,6 +2,7 @@
 
 import { useState, FormEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import emailjs from "@emailjs/browser";
 import { Button } from "@/components/ui";
 import { trackConversion, CONVERSION_IDS } from "@/lib/gtag";
 
@@ -47,23 +48,24 @@ export function ContactForm() {
     };
 
     try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
+      await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        {
+          from_name: data.name,
+          from_email: data.email,
+          phone: data.phone,
+          subject: "Demande de contact",
+          message: data.message,
+        },
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!,
+      );
 
-      const result = await res.json();
-
-      if (!res.ok) {
-        setError(result.error || "Erreur lors de l'envoi. Veuillez réessayer.");
-      } else {
-        setSuccess(true);
-        trackConversion(CONVERSION_IDS.formulaire);
-        (e.target as HTMLFormElement).reset();
-      }
+      setSuccess(true);
+      trackConversion(CONVERSION_IDS.formulaire);
+      (e.target as HTMLFormElement).reset();
     } catch {
-      setError("Erreur de connexion. Veuillez réessayer.");
+      setError("Erreur lors de l'envoi. Veuillez réessayer.");
     } finally {
       setIsPending(false);
     }
