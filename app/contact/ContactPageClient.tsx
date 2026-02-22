@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { Container } from "@/components/ui";
 import { ContactForm } from "@/components/forms";
 import { CONTACT } from "@/lib/constants";
-import { fadeUp, staggerContainer, staggerItem } from "@/lib/animations";
 
 const contactInfo = [
   {
@@ -87,25 +86,18 @@ export default function ContactPageClient() {
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             {/* Contact Info */}
-            <motion.div
-              className="lg:col-span-1"
-              variants={staggerContainer}
-              initial="hidden"
-              animate="visible"
-            >
-              <motion.h2
+            <div className="lg:col-span-1">
+              <h2
                 className="text-2xl font-semibold mb-8"
                 style={{ fontFamily: "var(--font-heading)" }}
-                variants={staggerItem}
               >
                 Nos coordonnées
-              </motion.h2>
+              </h2>
 
               <div className="space-y-6">
                 {contactInfo.map((item) => (
-                  <motion.div
+                  <div
                     key={item.title}
-                    variants={staggerItem}
                     className="group"
                   >
                     {item.href ? (
@@ -136,14 +128,13 @@ export default function ContactPageClient() {
                         </div>
                       </div>
                     )}
-                  </motion.div>
+                  </div>
                 ))}
               </div>
 
               {/* Trust badges */}
-              <motion.div
+              <div
                 className="mt-10 p-6 bg-[var(--color-background-alt)] rounded-2xl"
-                variants={staggerItem}
               >
                 <h3 className="font-semibold mb-4" style={{ fontFamily: "var(--font-heading)" }}>
                   Pourquoi nous faire confiance ?
@@ -158,17 +149,11 @@ export default function ContactPageClient() {
                     </li>
                   ))}
                 </ul>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
 
             {/* Contact Form */}
-            <motion.div
-              className="lg:col-span-2"
-              variants={fadeUp}
-              initial="hidden"
-              animate="visible"
-              custom={0.2}
-            >
+            <div className="lg:col-span-2">
               <div className="bg-white p-8 md:p-10 rounded-2xl shadow-xl border border-gray-100">
                 <h2
                   className="text-2xl font-semibold mb-2"
@@ -181,7 +166,7 @@ export default function ContactPageClient() {
                 </p>
                 <ContactForm />
               </div>
-            </motion.div>
+            </div>
           </div>
         </Container>
       </section>
