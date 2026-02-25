@@ -52,7 +52,7 @@ export default function ContactPageClient() {
       <section className="relative py-24 md:py-32 overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/services/workers-boxes.png"
+            src="/images/services/workers-boxes.webp"
             alt="Contactez-nous"
             fill
             priority

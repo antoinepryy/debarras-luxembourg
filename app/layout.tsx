@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Montserrat, Open_Sans } from "next/font/google";
 import "./globals.css";
 import { Header, Footer } from "@/components/layout";
 import { FloatingContact } from "@/components/ui";
@@ -6,6 +7,20 @@ import { PhoneClickTracker } from "@/components/tracking/PhoneClickTracker";
 import { LocalBusinessJsonLd } from "@/components/seo/JsonLd";
 import { SITE_NAME, SITE_DESCRIPTION, SITE_URL } from "@/lib/constants";
 import { GA_TRACKING_ID } from "@/lib/gtag";
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-montserrat",
+  display: "swap",
+});
+
+const openSans = Open_Sans({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-opensans",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -56,8 +71,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr">
+    <html lang="fr" className={`${montserrat.variable} ${openSans.variable}`}>
       <head>
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://www.google.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.google.com" />
         <script
           async
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}

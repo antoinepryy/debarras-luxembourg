@@ -95,7 +95,7 @@ export default function GreniersPageClient() {
       <section className="relative py-24 md:py-32 overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/services/worker-cluttered-house.png"
+            src="/images/services/worker-cluttered-house.webp"
             alt="Débarras de greniers au Luxembourg"
             fill
             priority

@@ -8,7 +8,7 @@ import { CONTACT } from "@/lib/constants";
 import { fadeUp, fadeIn, staggerContainer, staggerItem } from "@/lib/animations";
 
 const HERO_IMAGES = [
-  "/images/hero/hero-bg-1.png",
+  "/images/hero/hero-bg-1.webp",
   "/images/hero/hero-bg-2.jpg",
 ];
 
