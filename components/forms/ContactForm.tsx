@@ -116,6 +116,9 @@ export function ContactForm() {
               id="name"
               name="name"
               required
+              aria-required="true"
+              aria-invalid={!!errors.name}
+              aria-describedby={errors.name ? "name-error" : undefined}
               onFocus={() => setFocusedField("name")}
               onBlur={(e) => { setFocusedField(null); validateField("name", e.target.value); }}
               className={`${inputBaseClasses} ${inputFocusClasses} pl-11 ${errors.name ? "border-red-400 bg-red-50/50" : "border-gray-200"}`}
@@ -127,7 +130,7 @@ export function ContactForm() {
               </svg>
             </div>
           </div>
-          {errors.name && <p className="mt-2 text-sm text-red-500">{errors.name}</p>}
+          {errors.name && <p id="name-error" role="alert" className="mt-2 text-sm text-red-500">{errors.name}</p>}
         </motion.div>
 
         {/* Email */}
@@ -144,6 +147,9 @@ export function ContactForm() {
               id="email"
               name="email"
               required
+              aria-required="true"
+              aria-invalid={!!errors.email}
+              aria-describedby={errors.email ? "email-error" : undefined}
               onFocus={() => setFocusedField("email")}
               onBlur={(e) => { setFocusedField(null); validateField("email", e.target.value); }}
               className={`${inputBaseClasses} ${inputFocusClasses} pl-11 ${errors.email ? "border-red-400 bg-red-50/50" : "border-gray-200"}`}
@@ -156,7 +162,7 @@ export function ContactForm() {
               </svg>
             </div>
           </div>
-          {errors.email && <p className="mt-2 text-sm text-red-500">{errors.email}</p>}
+          {errors.email && <p id="email-error" role="alert" className="mt-2 text-sm text-red-500">{errors.email}</p>}
         </motion.div>
       </div>
 
@@ -200,6 +206,7 @@ export function ContactForm() {
             name="message"
             rows={5}
             required
+            aria-required="true"
             onFocus={() => setFocusedField("message")}
             onBlur={() => setFocusedField(null)}
             className={`${inputBaseClasses} ${inputFocusClasses} pl-11 resize-none border-gray-200`}

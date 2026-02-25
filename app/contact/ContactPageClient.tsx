@@ -1,9 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
-import { Container } from "@/components/ui";
+import { Container, Breadcrumb } from "@/components/ui";
 import { ContactForm } from "@/components/forms";
-import { CONTACT } from "@/lib/constants";
+import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
+import { CONTACT, SITE_URL } from "@/lib/constants";
 
 const contactInfo = [
   {
@@ -39,18 +41,36 @@ const contactInfo = [
 export default function ContactPageClient() {
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Accueil", url: SITE_URL },
+          { name: "Contact", url: `${SITE_URL}/contact` },
+        ]}
+      />
+
       {/* Hero Section */}
       <section className="relative py-24 md:py-32 overflow-hidden">
         <div className="absolute inset-0">
-          <img
+          <Image
             src="/images/services/workers-boxes.png"
             alt="Contactez-nous"
-            className="absolute inset-0 w-full h-full object-cover"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
           />
           <div className="absolute inset-0 bg-black/55" />
         </div>
 
         <Container className="relative z-10">
+          <div className="mb-6">
+            <Breadcrumb
+              items={[
+                { label: "Accueil", href: "/" },
+                { label: "Contact" },
+              ]}
+            />
+          </div>
           <motion.div
             className="text-center text-white max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 30 }}

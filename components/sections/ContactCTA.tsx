@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Container, Button, PhoneBadge } from "@/components/ui";
 import { CONTACT } from "@/lib/constants";
@@ -18,10 +19,12 @@ export function ContactCTA({
     <section className="relative py-24 md:py-32 overflow-hidden">
       {/* Background image with overlay */}
       <div className="absolute inset-0">
-        <img
+        <Image
           src="/images/cta/cta-bg.jpg"
           alt=""
-          className="absolute inset-0 w-full h-full object-cover"
+          fill
+          sizes="100vw"
+          className="object-cover"
         />
         <div className="absolute inset-0 bg-black/55" />
         <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-primary-dark)]/40 to-[var(--color-secondary-dark)]/30" />

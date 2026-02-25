@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button, PhoneBadge, Container } from "@/components/ui";
 import { CONTACT } from "@/lib/constants";
@@ -49,10 +50,13 @@ export function Hero({
             className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
             style={{ opacity: currentSlide === index ? 1 : 0 }}
           >
-            <img
+            <Image
               src={src}
               alt="Débarras Luxembourg"
-              className="absolute inset-0 w-full h-full object-cover"
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover"
             />
           </div>
         ))}

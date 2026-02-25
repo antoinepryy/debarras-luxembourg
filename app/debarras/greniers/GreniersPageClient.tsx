@@ -1,8 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
-import { Container, SectionTitle, Button } from "@/components/ui";
+import { Container, SectionTitle, Button, Breadcrumb } from "@/components/ui";
 import { ContactCTA } from "@/components/sections";
+import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
+import { SITE_URL } from "@/lib/constants";
 import { fadeUp, staggerContainer, staggerItem } from "@/lib/animations";
 
 const greniersDetails = [
@@ -80,18 +83,38 @@ const processSteps = [
 export default function GreniersPageClient() {
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Accueil", url: SITE_URL },
+          { name: "Débarras", url: `${SITE_URL}/debarras` },
+          { name: "Greniers", url: `${SITE_URL}/debarras/greniers` },
+        ]}
+      />
+
       {/* Hero Section */}
       <section className="relative py-24 md:py-32 overflow-hidden">
         <div className="absolute inset-0">
-          <img
+          <Image
             src="/images/services/worker-cluttered-house.png"
             alt="Débarras de greniers au Luxembourg"
-            className="absolute inset-0 w-full h-full object-cover"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
           />
           <div className="absolute inset-0 bg-black/55" />
         </div>
 
         <Container className="relative z-10">
+          <div className="mb-6">
+            <Breadcrumb
+              items={[
+                { label: "Accueil", href: "/" },
+                { label: "Débarras", href: "/debarras" },
+                { label: "Greniers" },
+              ]}
+            />
+          </div>
           <motion.div
             className="text-center text-white max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 30 }}

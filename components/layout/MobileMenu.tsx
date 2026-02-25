@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -105,10 +106,12 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                   variants={itemVariants}
                   className="flex items-center gap-3"
                 >
-                  <img
+                  <Image
                     src="/images/logo-icon.png"
                     alt="Débarras Luxembourg"
-                    className="h-10 w-auto brightness-0 invert"
+                    width={32}
+                    height={32}
+                    className="brightness-0 invert"
                   />
                   <span className="text-white font-semibold" style={{ fontFamily: "var(--font-heading)" }}>
                     {SITE_NAME}

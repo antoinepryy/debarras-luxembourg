@@ -33,11 +33,13 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     title: `${SITE_NAME} - Service de débarras professionnel`,
     description: SITE_DESCRIPTION,
+    images: [{ url: "/images/hero/hero-bg-2.jpg", width: 1200, height: 630, alt: "Débarras Luxembourg - Service professionnel" }],
   },
   twitter: {
     card: "summary_large_image",
     title: `${SITE_NAME} - Service de débarras professionnel`,
     description: SITE_DESCRIPTION,
+    images: ["/images/hero/hero-bg-2.jpg"],
   },
   robots: {
     index: true,

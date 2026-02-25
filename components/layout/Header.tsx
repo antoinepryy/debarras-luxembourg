@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -94,10 +95,11 @@ export function Header() {
           <div className="flex items-center justify-between py-3.5">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3 group">
-              <img
+              <Image
                 src="/images/logo-icon.png"
                 alt="Débarras Luxembourg"
-                className="h-10 w-auto"
+                width={40}
+                height={40}
               />
               <div>
                 <span

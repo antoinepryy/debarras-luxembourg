@@ -1,9 +1,12 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Container, SectionTitle, Button } from "@/components/ui";
+import { Container, SectionTitle, Button, Breadcrumb } from "@/components/ui";
 import { ContactCTA } from "@/components/sections";
+import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
+import { SITE_URL } from "@/lib/constants";
 import { fadeUp, staggerContainer, staggerItem } from "@/lib/animations";
 
 const debarrasTypes = [
@@ -67,18 +70,36 @@ const processSteps = [
 export default function DebarrasPageClient() {
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Accueil", url: SITE_URL },
+          { name: "Débarras", url: `${SITE_URL}/debarras` },
+        ]}
+      />
+
       {/* Hero Section */}
       <section className="relative py-24 md:py-32 overflow-hidden">
         <div className="absolute inset-0">
-          <img
+          <Image
             src="/images/services/worker-cluttered-house.png"
             alt="Service de débarras"
-            className="absolute inset-0 w-full h-full object-cover"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
           />
           <div className="absolute inset-0 bg-black/55" />
         </div>
 
         <Container className="relative z-10">
+          <div className="mb-6">
+            <Breadcrumb
+              items={[
+                { label: "Accueil", href: "/" },
+                { label: "Débarras" },
+              ]}
+            />
+          </div>
           <motion.div
             className="text-center text-white max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
@@ -228,10 +249,12 @@ export default function DebarrasPageClient() {
                 variants={staggerItem}
                 className="group relative h-72 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300"
               >
-                <img
+                <Image
                   src={img.src}
                   alt={img.alt}
-                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                 <div className="absolute bottom-4 left-4">

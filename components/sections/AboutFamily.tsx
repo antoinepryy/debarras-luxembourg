@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Container, Button } from "@/components/ui";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
@@ -38,10 +39,12 @@ export function AboutFamily({
             className="relative"
           >
             <div className="relative h-[450px] md:h-[550px] rounded-2xl overflow-hidden">
-              <img
+              <Image
                 src="/images/about/weinrich-pere-fils.jpg"
                 alt="La famille Weinrich - père et fils"
-                className="absolute inset-0 w-full h-full object-cover"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
             </div>
