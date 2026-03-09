@@ -40,6 +40,7 @@ function ServiceCard({ service }: { service: (typeof SERVICES)[0] }) {
               alt={service.title}
               fill
               sizes="(max-width: 768px) 100vw, 33vw"
+              loading="eager"
               className="object-cover group-hover:scale-105 transition-transform duration-500"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
