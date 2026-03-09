@@ -1,6 +1,6 @@
 export const SITE_NAME = "Débarras Luxembourg";
 export const SITE_DESCRIPTION = "Service de débarras professionnel au Luxembourg. Devis et déplacement gratuits.";
-export const SITE_URL = "https://debarras-luxembourg.lu";
+export const SITE_URL = "https://www.debarras-luxembourg.lu";
 
 export const CONTACT = {
   phone: "+352 661 112 001",
