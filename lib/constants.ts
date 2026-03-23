@@ -26,6 +26,7 @@ export const NAV_ITEMS = [
       { label: "Débarras d'appartements", href: "/debarras/appartements" },
       { label: "Débarras de caves", href: "/debarras/caves" },
       { label: "Débarras de greniers", href: "/debarras/greniers" },
+      { label: "Syndrome de Diogène", href: "/debarras/diogene" },
     ],
   },
   { label: "Zones d'intervention", href: "/zones-intervention" },
