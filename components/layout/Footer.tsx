@@ -153,6 +153,8 @@ export function Footer() {
           <div className="flex flex-col sm:flex-row justify-between items-center gap-3">
             <p className="text-gray-600 text-xs">
               &copy; {currentYear} {SITE_NAME}. Tous droits r&eacute;serv&eacute;s.
+              {" · "}Site r&eacute;alis&eacute; par{" "}
+              <a href="https://antoineperry.fr" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400 transition-colors">Antoine Perry</a>{" · "}<a href="https://www.dna-engineering.lu/" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400 transition-colors">DNA Engineering</a>
             </p>
             <div className="flex items-center gap-5">
               <Link href="/mentions-legales" className="text-gray-600 hover:text-gray-400 text-xs transition-colors">
